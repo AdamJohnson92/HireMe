@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { LoginContext } from "../Context/LoginContext";
+
 
 export default function Login() {
+
+    const {setUserEmail} = useContext(LoginContext)
+
+   
 
     const [emailForm, setEmailForm] = useState('')
     const [passwordForm, setPasswordForm] = useState('')
@@ -19,6 +25,26 @@ export default function Login() {
             console.log(inputValue)
         }
     }
+
+ const handleSubmit = (event) => {
+        const validEmailRegex = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/)
+    
+        const emailCheck = validEmailRegex.test(emailForm)
+        if (emailCheck === false) {
+          window.alert('Not a valid email address')
+        }
+        if ( !emailForm || !passwordForm) {
+          window.alert('All three fields must be complete.')
+        }
+        event.preventDefault()
+    
+        if (emailCheck === true && emailForm && passwordForm) {
+           window.alert('Logging in Test')
+     
+        setEmailForm('')
+        setPasswordForm('')
+        }
+      }
 
     return (
         <>
