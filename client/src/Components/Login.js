@@ -4,7 +4,7 @@ import { LoginContext } from "../Context/LoginContext";
 
 export default function Login() {
 
-    const {setUserEmail} = useContext(LoginContext)
+    // const {user, setUser} = useContext(LoginContext)
 
    
 
@@ -59,7 +59,7 @@ export default function Login() {
                     <textarea className='form-box' id='password-box' type='text' name='password' value={passwordForm || ''} onChange={handleInputChange}>
                     </textarea></label>
 
-                <input className='btn' type='submit' value='Send' onClick={handleSubmit}
+                <input className='btn' type='submit' value='Login' onClick={handleSubmit}
                 />
 
             </form>
@@ -75,7 +75,7 @@ export default function Login() {
                     <textarea className='form-box' id='password-box' type='text' name='password' value={passwordForm || ''} onChange={handleInputChange}>
                     </textarea></label>
 
-                <input className='btn' type='submit' value='Send' onClick={handleSubmit}
+                <input className='btn' type='submit' value='Login' onClick={handleSubmit}
                 />
 
             </form>
