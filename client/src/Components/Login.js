@@ -48,6 +48,7 @@ export default function Login() {
 
     return (
         <>
+            <h3>Login As A Candidate</h3>
             <form className="login-form">
 
                 <label className='form-label' htmlFor='email'>Email:
@@ -62,6 +63,24 @@ export default function Login() {
                 />
 
             </form>
+
+            <h3>Login As An Employer</h3>
+            <form className="login-form">
+
+                <label className='form-label' htmlFor='email'>Email:
+                    <input className='form-box' type='text' name='email' value={emailForm || ''} onChange={handleInputChange}></input>
+                </label>
+
+                <label className='form-label' htmlFor='password'> Password :
+                    <textarea className='form-box' id='password-box' type='text' name='password' value={passwordForm || ''} onChange={handleInputChange}>
+                    </textarea></label>
+
+                <input className='btn' type='submit' value='Send' onClick={handleSubmit}
+                />
+
+            </form>
+
+
         </>
     )
 
