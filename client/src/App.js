@@ -14,8 +14,6 @@ function App() {
         <Login></Login>
       </LoginContext.Provider>
 
-      <h1>HELLO!</h1>
-      
     </div>
   );
 }

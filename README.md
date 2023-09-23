@@ -25,7 +25,7 @@
 
 HireNow is the leading destination for an Employer's tech candidates. HireNow allows employers to explore top candidates who are ready for hire.
 
-HireMe is a web-based application that empowers employers to effortlessly search and connect with active job candidates. Employers can easily browse candidate profiles, access their resumes, and identify ideal candidates for their current job openings.
+HireMe empowers employers to effortlessly search and connect with active job candidates. Employers can easily browse candidate profiles, access their resumes, and identify ideal candidates for their current job openings.
 
 HireMe simplifies the hiring process, providing employers with an efficient way to discover and connect with potential candidates. Also allowing job seekers a dynamic platform to showcase their skills ready to be discovered by eager employers.
 

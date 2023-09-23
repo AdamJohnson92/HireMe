@@ -1,3 +1,216 @@
+/* Global button style */
+.custom-btn {
+  margin-top: 5px;
+  font-size: 16px;
+  background-color: #5271FF; 
+  color: #fff; 
+  border: none; 
+  padding: 5px 15px; 
+  border-radius: 5px; 
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; 
+  transition: transform 0.3s;
+}
+
+/* Hover effect */
+.custom-btn:hover {
+  background-color: #f0f0f0; 
+  color: #5271FF; 
+  box-shadow: 0px 0px 10px #5271FF; 
+  cursor: pointer; 
+  transform: scale(1.1);
+}
+
+
+/* Styling for the header section */
+.header {
+  background-color: #fff;
+  color: #5271FF;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Styling for the dropdown menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: transparent;
+  color: #5271FF;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dropdown-content {
+  display: none;
+  color: #fff;
+  position: absolute;
+  background-color: #5271FF;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #5271FF;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #5271FF;
+}
+
+/* Styling for the slogan */
+.slogan {
+  font-style: italic;
+  margin-right: 20px;
+}
+
+/* Styling for the menu-bar */
+.menu-bar {
+  background-color: #333; /* Background color */
+  color: rgb(179, 174, 174); 
+  padding: 12px; 
+  display: flex; /* this makes the content inside display in a row */
+  justify-content: center; 
+  position: absolute; 
+  bottom: 50; /* this aligns it to the bottom of the header section*/
+  width: 100%;
+  padding: 10px;
+}
+
+/* Add this to your CSS stylesheet */
+.menu-bar a {
+  color: rgb(179, 174, 174); 
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s; /* Add a smooth transition for color change */
+}
+
+.menu-bar a:hover {
+  color: #5271FF; /* Change color on hover */
+}
+
+.main {
+  margin-bottom: 0; 
+  padding-bottom: 0; 
+}
+
+/* Styling for the background image */
+.background-image::before {
+  background-image: url("../src/assets/loginpage.png");
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .background-image::before {
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+/* Styling for the login section */
+.login-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Styling for the login form */
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-box.email-input {
+  width: 300px;
+  margin-top: 5px;
+}
+.form-box.password-input {
+  width: 272px; 
+  margin-top: 5px;
+}
+.form-box.email-input,
+.form-box.password-input {
+  height: 30px; 
+}
+
+
+/* Styling for the two review images under the login form*/
+.columns {
+  display: flex;
+  flex-wrap: wrap; /* this allows columns to stack on smaller screens */
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  position: relative; 
+  bottom: 15px; /* Move the columns up by 100px (adjust as needed) */
+  z-index: 9999;
+}
+
+
+.column {
+  text-align: center;
+  margin: 10px;
+  flex: 1; /* this makes equal width columns */
+  max-width: 50%; /* this makes two columns per row on small screens */
+  box-sizing: border-box; /* this makes sure the padding and borders don't add to the width */
+}
+
+/* Styling for images in columns */
+.column img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+  /* Adjust styles for screens up to 768px wide (typical tablets and mobile devices) */
+  
+  /* this center-aligns the menu items */
+  .dropdown {
+    text-align: center;
+  }
+
+  .dropdown-content {
+    left: 50%; /* Center the dropdown */
+    transform: translateX(-50%); /* Adjust for centering */
+  }
+  .menu-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  /* Stack columns vertically on small screens */
+  .columns {
+    flex-direction: column;
+  }
+  
+  /* Make the columns full width on small screens */
+  .column {
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+
+
 .App {
   text-align: center;
 }
@@ -14,14 +227,13 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #5271FF;
 }
 
 .App-link {
