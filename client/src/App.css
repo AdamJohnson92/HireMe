@@ -1,38 +1,147 @@
-.App {
-  text-align: center;
+/* Global button style */
+.custom-btn {
+  margin-top: 5px;
+  font-size: 16px;
+  background-color: #5271FF;
+  color: #fff;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  width: 120px;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Hover effect */
+.custom-btn:hover {
+  background-color: #f0f0f0;
+  color: #5271FF;
+  box-shadow: 0px 0px 10px #5271FF;
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Styling for the logo */
+.logo {
+  z-index: 2;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Styling for the header */
+.header {
+  background-color: #fff;
+  color: #5271FF;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+/* Styling for the header container */
+.header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+
+/* Styling for the menu-bar */
+.menu-bar {
+  background-color: #333;
+  color: rgb(214, 212, 212);
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 215px;
+  left: 0;
+  width: 100%;
+}
+
+.menu-bar a {
+  color: rgb(214, 212, 212);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.menu-bar a:hover {
+  color: #5271FF;
+}
+
+
+/* Styling for the main container */
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+
+.introduction-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 150px 0 0 0;
+  margin: 100px 0 0 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.introduction {
+  font-size: 16px;
+  color: #000;
+  text-align: justify;
+  margin: 15px;
+}
+
+/* Styling for the login container */
+.login-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 50px;
+}
+
+/* Styling for login columns */
+.login-column {
+  flex: 0 1 calc(50% - 10px);
+  margin-bottom: 20px;
+  padding: 0 40px 40px 40px;
+}
+
+/* Styling for the login forms */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-box {
+  width: 100%;
+  padding: 5px;
+}
+
+.btn {
+  background-color: #5271FF;
+  color: #fff;
+  border: none;
+  padding: 5px 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+  background-color: #f0f0f0;
+  color: #5271FF;
+  box-shadow: 0px 0px 10px #5271FF;
 }
