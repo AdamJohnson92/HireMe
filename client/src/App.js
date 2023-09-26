@@ -7,10 +7,11 @@ import Profile from './Components/Profile';
 import { createContext } from "react";
 
 export const UserContext = createContext();
+export const ArrayContext = createContext();
 
 function App() {
 
-  const adam = {
+  const homer = {
     firstName: 'Homer',
     lastName: 'Simpson',
     email: 'homer@doh.com',
@@ -19,15 +20,28 @@ function App() {
     skills: ['Javascript', 'React', 'Node', 'MERN Stack', 'Donut Consumption']
   }
 
+  const oscar = {
+    firstName: 'Oscar',
+    lastName: 'Grouch',
+    email: 'oscar@grumble.com',
+    location: 'Seseme Street',
+    education: ['Cambridge'],
+    skills: ['Handlebars', 'Garbage']
+  }
+
+  const candidateArray = [homer, oscar]
+
   const [candidateLoggedIn, setCandidateLoggedIn] = useState(false)
-  const [user, setUser] = useState(adam)
+  const [user, setUser] = useState(candidateArray[0])
 
   return (
     <div className="hire-app">
       <UserContext.Provider value={user}>
         <Header></Header>
         <Login></Login>
-        <Profile></Profile>
+        <ArrayContext.Provider value={candidateArray}>
+          <Profile></Profile>
+        </ArrayContext.Provider>
       </UserContext.Provider>
       
     </div>
