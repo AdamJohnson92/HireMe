@@ -4,6 +4,7 @@ import Login from "./Components/Login"
 // import { LoginContext } from './Context/LoginContext'
 import Header from './Components/Header';
 import Profile from './Components/Profile';
+import Footer from './Components/Footer'
 import { createContext } from "react";
 
 export const UserContext = createContext();
@@ -32,7 +33,7 @@ function App() {
   const candidateArray = [homer, oscar]
 
   const [candidateLoggedIn, setCandidateLoggedIn] = useState(false)
-  const [user, setUser] = useState(candidateArray[0])
+  const [user, setUser] = useState(candidateArray[1])
 
   return (
     <div className="hire-app">
@@ -43,6 +44,7 @@ function App() {
           <Profile></Profile>
         </ArrayContext.Provider>
       </UserContext.Provider>
+      <Footer></Footer>
       
     </div>
   );

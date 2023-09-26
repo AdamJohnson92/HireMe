@@ -1,4 +1,4 @@
-import { LoginContext } from "../Context/LoginContext";
+
 import Card from "./CandidateCard";
 
 export default function EmployerPage() {
