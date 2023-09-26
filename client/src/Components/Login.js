@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { LoginContext } from "../Context/LoginContext";
 
 
 export default function Login() {

@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 
 
-export default function Header({currentPage, handlePageChange}){
+export default function Header(){
     
     return(
         <div className="header">
