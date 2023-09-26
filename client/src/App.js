@@ -32,7 +32,7 @@ function App() {
   const candidateArray = [homer, oscar]
 
   const [candidateLoggedIn, setCandidateLoggedIn] = useState(false)
-  const [user, setUser] = useState(candidateArray[1])
+  const [user, setUser] = useState(candidateArray[0])
 
   return (
     <div className="hire-app">

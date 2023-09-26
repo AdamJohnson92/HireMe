@@ -11,6 +11,14 @@ export default function Card(){
         {candidateArray.map((candidate) => (
            <div>
             <h4>{candidate.firstName} {candidate.lastName}</h4>
+            <h6>{candidate.location}</h6>
+                <ul>
+                    {candidate.skills.map((skill) => (
+                         <li>
+                            {skill}
+                         </li>
+                    ))}
+                </ul>
            </div> 
         ))}
         </>
