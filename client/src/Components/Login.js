@@ -82,7 +82,7 @@ export default function Login() {
                         </label>
 
                         <label className='form-label' htmlFor='password'> Password :
-                            <textarea className='form-box' id='password-box' type='text' name='password' value={passwordForm || ''} onChange={handleInputChange} style={{ width: '100%', height: '20px' }}></textarea>
+                            <input className='form-box' id='password-box' type='text' name='password' value={passwordForm || ''} onChange={handleInputChange} style={{ width: '100%', height: '20px' }}></input>
                         </label>
 
                         <input className='custom-btn' type='submit' value='Login' style={{ display: 'block', margin: '0 auto' }} />
