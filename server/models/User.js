@@ -5,7 +5,7 @@ const Education = require('./Education');
 const Skills = require('./Skills');
 
 //Need to incorporate
-//const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
     firstName: {
