@@ -7,6 +7,9 @@ import LoginEmployer from '../Components/LoginEmployer'
 
 import Auth from '../utils/auth';
 
+//maybe radio button to eliminate dual login forms 
+//useMutation LOGIN_CANDIDATE/LOGIN_EMPLOYER
+
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
