@@ -8,6 +8,7 @@
   padding: 5px 15px;
   border-radius: 5px;
   width: 120px;
+  text-decoration: none;
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
   transition: transform 0.3s;
 }
