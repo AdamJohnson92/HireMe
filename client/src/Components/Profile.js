@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../App";
+import { UserContext } from "../pages/Home";
 import CandidatePage from "./CandidatePage";
 import EmployerPage from "./EmployerPage";
 

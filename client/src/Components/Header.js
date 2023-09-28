@@ -1,8 +1,15 @@
 import React from "react";
 import logo from "../assets/HireMe.png";
 import "../App.css";
+import { Link } from 'react-router-dom';
+
+import Auth from '../utils/auth';
 
 export default function Header() {
+    const logout = (event) => {
+        event.preventDefault();
+        Auth.logout();
+    };
     return (
         <header className="header">
             {/* Logo */}
@@ -16,6 +23,27 @@ export default function Header() {
                 position: 'absolute', top: '50%;', left: '40%', width: '100%;'
             }}>
                 <p>Find Your Perfect Candidate!</p>
+            </div>
+            <div>
+                {Auth.loggedIn() ? (
+                    <>
+                        <Link className="btn btn-lg btn-info m-2" to="/me">
+                            {Auth.getProfile().data.username}'s profile
+                        </Link>
+                        <button className="custom-btn" onClick={logout}>
+                            Logout
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        <Link className="custom-btn" to="/login">
+                            Login
+                        </Link>
+                        <Link className="custom-btn" to="/signup">
+                            Signup
+                        </Link>
+                    </>
+                )}
             </div>
             {/* Menu Bar */}
             <div className="menu-bar">

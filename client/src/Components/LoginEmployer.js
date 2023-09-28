@@ -1,4 +1,3 @@
-import employer from "../assets/employer.png";
 import {useState} from 'react'
 import "../App.css";
 
@@ -43,7 +42,6 @@ export default function LoginEmployer() {
 
     return (
         <div className="login-column">
-                <img src={employer} alt="Employer" width="250" height="250" />
 
                 <h3 style={{ color: '#5271FF', textAlign: 'center', paddingBottom: '10px' }}>Employer Login</h3>
                     <form className="login-form" onSubmit={handleSubmitEmployer}>
