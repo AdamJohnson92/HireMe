@@ -28,11 +28,11 @@ export default function Header() {
         fontStyle: 'italic',
         width: '100%',
         textAlign: 'center',
-        margin: '0 auto',   
+        margin: '0 auto',
     };
 
     const mobileSloganStyle = {
-        fontSize: '33px', 
+        fontSize: '33px',
     };
 
     return (
@@ -45,7 +45,7 @@ export default function Header() {
             {/* Slogan */}
             <div className="slogan" style={sloganStyle}>
                 <p style={mobileSloganStyle}>Find Your Perfect Candidate!</p>
-            </div>            
+            </div>
             {/* Buttons */}
             <div style={buttonStyle}>
                 {Auth.loggedIn() ? (
@@ -85,8 +85,16 @@ export default function Header() {
                         <i className="fa fa-coursera"></i> coursera
                     </a>
                     &nbsp;&nbsp;&nbsp;
+                    <a href="https://www.linkedin.com/jobs/" style={{ fontWeight: 'bold' }}>
+                        <i className="fa fa-linkedin"></i> LinkedIn
+                    </a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="https://www.indeed.com/" style={{ fontWeight: 'bold' }}>
+                        Indeed
+                    </a>
                 </div>
             </div>
         </header>
+
     );
 }
