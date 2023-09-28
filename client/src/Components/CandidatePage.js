@@ -1,4 +1,4 @@
-import { UserContext } from "../App";
+import { UserContext } from "../pages/Home";
 import Skill from './Skill'
 import React, { useContext } from "react";
 
