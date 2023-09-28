@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { ArrayContext, UserContext } from "../App";
+import { ArrayContext, UserContext } from "../pages/Home";
 
 export default function Card() {
 
