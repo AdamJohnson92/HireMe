@@ -28,7 +28,7 @@ const userSchema = new Schema({
     isEmployer: {
         type: Boolean,
         required: true,
-    }
+    },
     userCity: {
         type: String,
         required: false,

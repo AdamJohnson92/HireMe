@@ -43,14 +43,6 @@ function Home() {
           {/* Two columns with images for reviews */}
           
           <Welcome />
-          <section className="columns">
-            <div className="column">
-              <img src={employer} alt="Employer Review" width="300" height="250" />
-            </div>
-            <div className="column">
-              <img src={candidate} alt="Candidate Review" width="300" height="250" />
-            </div>
-          </section>
           {/* <Profile/> */}
         </ArrayContext.Provider>
       </UserContext.Provider>

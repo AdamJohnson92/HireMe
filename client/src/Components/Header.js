@@ -2,7 +2,6 @@ import React from "react";
 import logo from "../assets/HireMe.png";
 import "../App.css";
 import { Link } from 'react-router-dom';
-
 import Auth from '../utils/auth';
 
 export default function Header() {
@@ -10,6 +9,32 @@ export default function Header() {
         event.preventDefault();
         Auth.logout();
     };
+
+    const buttonStyle = {
+        position: 'absolute',
+        top: '10px',
+        right: '30px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+    };
+
+    const centeredText = {
+        textAlign: 'center',
+    };
+
+    const sloganStyle = {
+        fontWeight: 'bold',
+        fontStyle: 'italic',
+        width: '100%',
+        textAlign: 'center',
+        margin: '0 auto',   
+    };
+
+    const mobileSloganStyle = {
+        fontSize: '33px', 
+    };
+
     return (
         <header className="header">
             {/* Logo */}
@@ -18,33 +43,32 @@ export default function Header() {
             </div>
 
             {/* Slogan */}
-            <div className="slogan" style={{
-                fontSize: '28px', fontWeight: 'bold', fontStyle: 'italic',
-                position: 'absolute', top: '50%;', left: '40%', width: '100%;'
-            }}>
-                <p>Find Your Perfect Candidate!</p>
-            </div>
-            <div>
+            <div className="slogan" style={sloganStyle}>
+                <p style={mobileSloganStyle}>Find Your Perfect Candidate!</p>
+            </div>            
+            {/* Buttons */}
+            <div style={buttonStyle}>
                 {Auth.loggedIn() ? (
                     <>
                         <Link className="btn btn-lg btn-info m-2" to="/me">
                             {Auth.getProfile().data.username}'s profile
                         </Link>
-                        <button className="custom-btn" onClick={logout}>
+                        <button className="custom-btn" onClick={logout} style={centeredText}>
                             Logout
                         </button>
                     </>
                 ) : (
                     <>
-                        <Link className="custom-btn" to="/login">
+                        <Link className="custom-btn" to="/login" style={centeredText}>
                             Login
                         </Link>
-                        <Link className="custom-btn" to="/signup">
+                        <Link className="custom-btn" to="/signup" style={centeredText}>
                             Signup
                         </Link>
                     </>
                 )}
             </div>
+
             {/* Menu Bar */}
             <div className="menu-bar">
                 <div className="menu-container">
