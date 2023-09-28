@@ -1,5 +1,5 @@
 const db = require('../config/connection');
-const { User, Education, Skills } = require('../models');
+const { User, Skills } = require('../models');
 
 db.once('open', async () => {
     //Seeding Skills
@@ -8,19 +8,11 @@ db.once('open', async () => {
     const skills = await Skills.insertMany([
         { name: 'Javascript' },
         { name: 'CSS' },
+        { name: 'MongoDB' },
+        { name: 'mySQL' }
     ]);
 
     console.log('Skills seeded');
-
-    //Seeding Education
-    await Education.deleteMany();
-
-    const education = await Education.insertMany([
-        { name: 'Stanford' },
-        { name: 'Harvard' },
-    ]);
-
-    console.log('Education seeded');
 
     //Seeding User
     await User.deleteMany();
@@ -30,8 +22,8 @@ db.once('open', async () => {
         lastName: 'Wick',
         email: 'johnwick@testmail.com',
         password: 'password123',
-        skills: [skills[0].name],
-        education: [education[1].name]
+        education: 'Harvard',
+        skills: [skills[0], skills[1]]
     });
 
     console.log('Users seeded');
