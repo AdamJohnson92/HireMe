@@ -7,9 +7,12 @@ const typeDefs = gql`
     lastName: String
     email: String
     password: String
+    userCity: String
+    userState: String
   }
   type Skills {
-
+    _id: ID
+    name: String
   }
 
   type Auth {
@@ -19,12 +22,12 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
-    user(username: String!): User
+    user(email: String!): User
     me: User
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
   }
 `;
