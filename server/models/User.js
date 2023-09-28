@@ -1,11 +1,8 @@
 const mongoose = require('mongoose');
 
 const { Schema, model } = mongoose;
-const Education = require('./Education');
 const Skills = require('./Skills');
-
-//Need to incorporate
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
     firstName: {
@@ -28,29 +25,42 @@ const userSchema = new Schema({
         required: true,
         minlength: 4
     },
+    isEmployer: {
+        type: Boolean,
+        required: true,
+    }
     userCity: {
         type: String,
         required: false,
-        trim: true
     },
     userState: {
         type: String,
         required: false,
-        trim: true
     },
-    education: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Education'
-        }
-    ],
+    education: {
+        type: String,
+        required: false,
+    },
     skills: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Skills'
+            ref: "Skills",
         }
     ]
 });
+
+userSchema.pre('save', async function(next) {
+    if (this.isNew || this.isModified('password')) {
+      const saltRounds = 10;
+      this.password = await bcrypt.hash(this.password, saltRounds);
+    }
+  
+    next();
+});
+userSchema.methods.isCorrectPassword = async function(password) {
+    return await bcrypt.compare(password, this.password);
+  };
+
 
 const User = mongoose.model('User', userSchema);
 
