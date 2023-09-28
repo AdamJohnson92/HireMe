@@ -1,6 +1,5 @@
 
 import { useState } from 'react'
-import candidate from "../assets/candidate.png";
 import "../App.css";
 
 export default function Login() {
@@ -45,7 +44,6 @@ export default function Login() {
 
     return (
         <div className="login-column">
-            <img src={candidate} alt="Candidate" width="250" height="250" />
 
             <h3 style={{ color: '#5271FF', textAlign: 'center', paddingBottom: '10px' }}>Candidate Login</h3>
             <form className="login-form" onSubmit={handleSubmit}>
