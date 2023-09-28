@@ -29,11 +29,11 @@ export default function Login() {
             </div>
 
 
-            {/* Login forms */}
+            {/* Login forms
             <div className="login-container">
                 <LoginCandidate></LoginCandidate>
                 <LoginEmployer></LoginEmployer>
-            </div>
+            </div> */}
         </main>
     );
 }
