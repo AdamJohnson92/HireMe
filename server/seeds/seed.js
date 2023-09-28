@@ -22,8 +22,21 @@ db.once('open', async () => {
         lastName: 'Wick',
         email: 'johnwick@testmail.com',
         password: 'password123',
+        isEmployer: false,
         education: 'Harvard',
-        skills: [skills[0], skills[1]]
+        userCity: 'Phoenix',
+        userState: 'AZ',
+        skills: [
+            skills[0]._id, skills[1]._id
+        ]
+    });
+
+    await User.create({
+        firstName: 'Your',
+        lastName: 'Employer',
+        email: 'Employer@ceo.com',
+        password: 'password123000',
+        isEmployer: true,
     });
 
     console.log('Users seeded');

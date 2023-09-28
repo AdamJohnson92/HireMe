@@ -25,6 +25,10 @@ const userSchema = new Schema({
         required: true,
         minlength: 4
     },
+    isEmployer: {
+        type: Boolean,
+        required: true,
+    }
     userCity: {
         type: String,
         required: false,
@@ -40,7 +44,7 @@ const userSchema = new Schema({
     skills: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Skills'
+            ref: "Skills",
         }
     ]
 });
