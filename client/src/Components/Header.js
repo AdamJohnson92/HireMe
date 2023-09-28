@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from 'react-router-dom'; 
 import logo from "../assets/HireMe.png";
 import "../App.css";
-import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 
 export default function Header() {
@@ -37,10 +37,12 @@ export default function Header() {
 
     return (
         <header className="header">
-            {/* Logo */}
-            <div className="logo">
-                <img src={logo} width="205" height="200" alt="HireMe Company Logo" />
-            </div>
+            {/* Made the Logo as Link back to Home/Welcome page */}
+            <Link to="/">
+                <div className="logo">
+                    <img src={logo} width="205" height="200" alt="HireMe Company Logo" />
+                </div>
+            </Link>
 
             {/* Slogan */}
             <div className="slogan" style={sloganStyle}>
