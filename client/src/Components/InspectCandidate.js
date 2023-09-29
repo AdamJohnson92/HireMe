@@ -1,5 +1,6 @@
 import { ArrayContext, UserContext } from "../pages/Home";
 import Skill from './Skill'
+import Education from "./Education";
 import React, { useState, useContext } from "react";
 
 export default function InspectCandidate(){
@@ -18,7 +19,13 @@ export default function InspectCandidate(){
             <h2>View Candidate Profile</h2>
             
             <h1> Name: {inspectCandidate.firstName} {inspectCandidate.lastName}</h1>
-            <h3> Location: {inspectCandidate.location}</h3>
+            <h3>Contact: {inspectCandidate.email}</h3>
+            <h3> Location: {inspectCandidate.locationCity}, {inspectCandidate.locationState}</h3>
+            <h4>Education:
+                <ul>
+                    <Education></Education>
+                </ul>
+            </h4>
             <h3>Skills:</h3>
             <ul>
                 <Skill viwer={viewer}></Skill>

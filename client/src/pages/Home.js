@@ -18,8 +18,9 @@ function Home() {
     firstName: 'Homer',
     lastName: 'Simpson',
     email: 'homer@doh.com',
-    location: 'Springfield',
-    education: ['Oxford'],
+    locationCity: 'Springfield',
+    locationState: 'Illinois',
+    education: ['Oxford', 'Harvard'],
     skills: ['Javascript', 'React', 'Node', 'MERN Stack', 'Donut Consumption'],
     isEmployer: false
   }
@@ -28,8 +29,9 @@ function Home() {
     firstName: 'Oscar',
     lastName: 'Grouch',
     email: 'oscar@grumble.com',
-    location: 'Seseme Street',
-    education: ['Cambridge'],
+    locationCity: 'Seseme Street',
+    locationState: 'Wyoming',
+    education: ['Cambridge', 'Yale'],
     skills: ['Handlebars', 'Garbage'],
     isEmployer: false
   }
@@ -49,13 +51,11 @@ function Home() {
   return (
     <div className="hire-app">
       <UserContext.Provider value={user}>
-
-        <Header></Header>
         <ArrayContext.Provider value={candidateArray}>
           {/* Two columns with images for reviews */}
           <Welcome />
           <Profile />
-          <InspectCandidate></InspectCandidate>
+          {/* <InspectCandidate></InspectCandidate> */}
         </ArrayContext.Provider>
 
       </UserContext.Provider>
