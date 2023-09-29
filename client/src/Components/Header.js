@@ -32,7 +32,7 @@ export default function Header() {
     };
 
     const mobileSloganStyle = {
-        fontSize: '33px',
+        fontSize: '26px',
     };
 
     return (

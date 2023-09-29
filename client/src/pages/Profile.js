@@ -34,17 +34,15 @@ export default function Profile(){
   
     if (!user?.username) {
       return (
-        <h4>
+        <h4 style={{ marginTop: '275px' }}>
           You need to be logged in to see this. Use the navigation links above to
           sign up or log in!
         </h4>
       );
     }
-    return(
-        <>
-            {/* <CandidatePage></CandidatePage>
-            <EmployerPage></EmployerPage> */}
+    return (
+        <div className="profile">
             {renderPage()}
-        </>
+        </div>
     )
 }
