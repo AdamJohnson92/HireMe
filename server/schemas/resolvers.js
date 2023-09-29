@@ -20,7 +20,7 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, {firstName, lastName, email, password, isEmployer, userCity, userState, education, skills }) => {
-      console.log("Received values:", { firstName, lastName, email, password, isEmployer, userCity, userState, education, skills });
+
       //Checks that all fields are given to create a user
       if (!email || !password || isEmployer === null) {
       throw new AuthenticationError('Email, Password, and Employer status required!');
@@ -62,6 +62,24 @@ const resolvers = {
 
       return { token, user };
     },
+    //Adding in update mutations on City, State, Education, and Skills
+    updateUserCity: async (parent, { userId, newCity }, context) => {
+      // if (!context.user) {
+      //   throw new AuthenticationError('You need to be logged in!');
+      // }
+      const updatedUser = await User.findByIdAndUpdate(userId, { userCity: newCity }, { new: true });
+      return updatedUser;
+    },
+    updateUserState: async (parent, { userId, newState }, context) => {
+      // if (!context.user) {
+      //   throw new AuthenticationError('You need to be logged in!');
+      // }
+      const updatedUser = await User.findByIdAndUpdate(userId, { userState: newState }, { new: true });
+      return updatedUser;
+    },
+
+
+
   },
 };
 
