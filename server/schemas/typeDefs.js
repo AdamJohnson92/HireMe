@@ -6,9 +6,10 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     email: String
-    password: String
     userCity: String
     userState: String
+    skills: [Skills]
+    isEmployer: Boolean
   }
   type Skills {
     _id: ID
@@ -27,7 +28,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    addUser(firstName: String, lastName: String, email: String!, password: String!, isEmployer: Boolean!, userCity: String, userState: String, education: String, skills: [String]): Auth
     login(email: String!, password: String!): Auth
   }
 `;

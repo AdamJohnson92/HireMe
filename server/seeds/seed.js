@@ -17,15 +17,16 @@ db.once('open', async () => {
     //Seeding User
     await User.deleteMany();
 
+    //This user contains all attributes of the user model
     await User.create({
         firstName: 'John',
         lastName: 'Wick',
         email: 'johnwick@testmail.com',
         password: 'password123',
         isEmployer: false,
-        education: 'Harvard',
         userCity: 'Phoenix',
         userState: 'AZ',
+        education: 'Harvard',
         skills: [
             skills[0]._id, skills[1]._id
         ]

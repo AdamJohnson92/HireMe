@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const { Schema, model } = mongoose;
-const Skills = require('./Skills');
+//const Skills = require('./Skills');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
@@ -28,7 +28,7 @@ const userSchema = new Schema({
     isEmployer: {
         type: Boolean,
         required: true,
-    }
+    },
     userCity: {
         type: String,
         required: false,
