@@ -11,9 +11,11 @@ import Auth from '../utils/auth';
 
 const Signup = () => {
   const [formState, setFormState] = useState({
-    username: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
+    isEmployer: false
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
@@ -74,10 +76,21 @@ const Signup = () => {
                 <div className="mb-3">
                   <input
                     className="form-box"
-                    placeholder="Your username"
-                    name="username"
+                    placeholder="Your first name"
+                    name="firstName"
                     type="text"
-                    value={formState.name}
+                    value={formState.firstName}
+                    onChange={handleChange}
+                    style={inputStyle}
+                  />
+                </div>
+                <div className="mb-3">
+                  <input
+                    className="form-box"
+                    placeholder="Your last name"
+                    name="lastName"
+                    type="text"
+                    value={formState.lastName}
                     onChange={handleChange}
                     style={inputStyle}
                   />
@@ -104,6 +117,17 @@ const Signup = () => {
                     style={inputStyle}
                   />
                 </div>
+                <div className="mb-3">
+                  <p>Are you an employer?</p>
+                  <input
+                    className="form-box"
+                    name="isEmployer"
+                    type="checkbox"
+                    value={formState.isEmployer}
+                    onChange={handleChange}
+                    style={inputStyle}
+                  />
+                  </div>
                 <button
                   className="custom-btn"
                   style={{ cursor: 'pointer' }}
