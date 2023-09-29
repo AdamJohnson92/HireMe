@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import candidate from "../assets/candidate.png";
 import "../App.css";
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
+
+import Auth from '../utils/auth';
 
 export default function Login() {
+    const [login, { error, data }] = useMutation(LOGIN_USER);
     const [emailForm, setEmailForm] = useState('');
     const [passwordForm, setPasswordForm] = useState('');
 
@@ -17,7 +23,8 @@ export default function Login() {
         }
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         const validEmailRegex = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
 
         const emailCheck = validEmailRegex.test(emailForm);
@@ -27,10 +34,16 @@ export default function Login() {
         if (!emailForm || !passwordForm) {
             window.alert('All fields must be complete.');
         }
-        event.preventDefault();
-
         if (emailCheck === true && emailForm && passwordForm) {
-            window.alert('Logging in Test');
+            try {
+                const { data } = await login({
+                  variables: { ...emailForm, ...passwordForm },
+                });
+          
+                Auth.login(data.login.token);
+              } catch (e) {
+                console.error(e);
+              }
 
             setEmailForm('');
             setPasswordForm('');
@@ -50,10 +63,16 @@ export default function Login() {
     };
 
     return (
-        <div className="login-column">
-            <img src={candidate} alt="Candidate" width="250" height="250" />
+        <div className="background-image">
+        <div className="login-column">            
 
 <h2 style={{ color: '#5271FF', textAlign: 'center', paddingBottom: '10px', paddingTop: '30px' }}>Candidate Login</h2>
+{data ? (
+              <p>
+                Success! You may now head{' '}
+                <Link to="/">back to the homepage.</Link>
+              </p>
+            ) : (
             <form className="login-form" onSubmit={handleSubmit} style={formStyle}>
                 <label className='form-label' htmlFor='email' style={labelStyle}>Email:</label>
                 <input className='form-box' type='text' name='email' value={emailForm || ''} onChange={handleInputChange} />
@@ -63,6 +82,8 @@ export default function Login() {
 
                 <input className='custom-btn' type='submit' value='Login' style={{ display: 'block', margin: '20px auto 0' }} />
             </form>
+            )}
+        </div>
         </div>
     )
 }

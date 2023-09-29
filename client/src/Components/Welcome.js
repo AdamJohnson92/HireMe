@@ -25,7 +25,7 @@ export default function Welcome() {
                         <br />
                         <br />
                         So, what are you waiting for?!{" "}
-                        <a href="path_to_signup_js">Signup Now!</a>
+                        <a href="/signup">Signup Now!</a>
                     </p>
                 </div>
             </div>
