@@ -130,6 +130,11 @@
   padding: 5px;
 }
 
+.candidate-form-box {
+  width: 75%px;
+  
+}
+
 .btn {
   background-color: #5271FF;
   color: #fff;
