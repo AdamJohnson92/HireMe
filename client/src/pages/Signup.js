@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import "../App.css";
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
+
+//Must add radial button to signup to select if you are a candidate or an employer
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -38,9 +41,26 @@ const Signup = () => {
     }
   };
 
+  const inputStyle = {
+    border: '1px solid #ccc',
+    borderRadius: '5px',
+    padding: '10px',
+    marginBottom: '10px',
+    width: '400px',
+    height: '30px',
+  };
+
+  const mainStyle = {
+    marginTop: '80px',
+    display: 'flex',
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    minHeight: 'calc(100vh - 120px)', 
+  };
+
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
+    <main className="flex-row justify-center mb-4" style={mainStyle}>
+      <div className="col-12 col-lg-6">
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
           <div className="card-body">
@@ -51,32 +71,41 @@ const Signup = () => {
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your username"
-                  name="username"
-                  type="text"
-                  value={formState.name}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
+                <div className="mb-3">
+                  <input
+                    className="form-box"
+                    placeholder="Your username"
+                    name="username"
+                    type="text"
+                    value={formState.name}
+                    onChange={handleChange}
+                    style={inputStyle}
+                  />
+                </div>
+                <div className="mb-3">
+                  <input
+                    className="form-box"
+                    placeholder="Your email"
+                    name="email"
+                    type="email"
+                    value={formState.email}
+                    onChange={handleChange}
+                    style={inputStyle}
+                  />
+                </div>
+                <div className="mb-3">
+                  <input
+                    className="form-box"
+                    placeholder="******"
+                    name="password"
+                    type="password"
+                    value={formState.password}
+                    onChange={handleChange}
+                    style={inputStyle}
+                  />
+                </div>
                 <button
-                  className="btn btn-block btn-primary"
+                  className="custom-btn"
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >

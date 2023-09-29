@@ -1,22 +1,76 @@
 import React from "react";
+import { Link } from 'react-router-dom'; 
 import logo from "../assets/HireMe.png";
 import "../App.css";
+import Auth from '../utils/auth';
 
 export default function Header() {
+    const logout = (event) => {
+        event.preventDefault();
+        Auth.logout();
+    };
+
+    const buttonStyle = {
+        position: 'absolute',
+        top: '10px',
+        right: '30px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+    };
+
+    const centeredText = {
+        textAlign: 'center',
+    };
+
+    const sloganStyle = {
+        fontWeight: 'bold',
+        fontStyle: 'italic',
+        width: '100%',
+        textAlign: 'center',
+        margin: '0 auto',
+    };
+
+    const mobileSloganStyle = {
+        fontSize: '33px',
+    };
+
     return (
         <header className="header">
-            {/* Logo */}
-            <div className="logo">
-                <img src={logo} width="205" height="200" alt="HireMe Company Logo" />
-            </div>
+            {/* Made the Logo as Link back to Home/Welcome page */}
+            <Link to="/">
+                <div className="logo">
+                    <img src={logo} width="205" height="200" alt="HireMe Company Logo" />
+                </div>
+            </Link>
 
             {/* Slogan */}
-            <div className="slogan" style={{
-                fontSize: '28px', fontWeight: 'bold', fontStyle: 'italic',
-                position: 'absolute', top: '50%;', left: '40%', width: '100%;'
-            }}>
-                <p>Find Your Perfect Candidate!</p>
+            <div className="slogan" style={sloganStyle}>
+                <p style={mobileSloganStyle}>Find Your Perfect Candidate!</p>
             </div>
+            {/* Buttons */}
+            <div style={buttonStyle}>
+                {Auth.loggedIn() ? (
+                    <>
+                        <Link className="btn btn-lg btn-info m-2" to="/me">
+                            {Auth.getProfile().data.username}'s profile
+                        </Link>
+                        <button className="custom-btn" onClick={logout} style={centeredText}>
+                            Logout
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        <Link className="custom-btn" to="/login" style={centeredText}>
+                            Login
+                        </Link>
+                        <Link className="custom-btn" to="/signup" style={centeredText}>
+                            Signup
+                        </Link>
+                    </>
+                )}
+            </div>
+
             {/* Menu Bar */}
             <div className="menu-bar">
                 <div className="menu-container">
@@ -33,8 +87,16 @@ export default function Header() {
                         <i className="fa fa-coursera"></i> coursera
                     </a>
                     &nbsp;&nbsp;&nbsp;
+                    <a href="https://www.linkedin.com/jobs/" style={{ fontWeight: 'bold' }}>
+                        <i className="fa fa-linkedin"></i> LinkedIn
+                    </a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="https://www.indeed.com/" style={{ fontWeight: 'bold' }}>
+                        Indeed
+                    </a>
                 </div>
             </div>
         </header>
+
     );
 }

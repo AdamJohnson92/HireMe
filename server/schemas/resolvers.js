@@ -44,6 +44,7 @@ const resolvers = {
       return { token, user };
     
     },
+    //need two different login mutations? Must discuss.
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
