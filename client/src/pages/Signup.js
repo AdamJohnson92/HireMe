@@ -7,6 +7,8 @@ import { ADD_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
+//Must add radial button to signup to select if you are a candidate or an employer
+
 const Signup = () => {
   const [formState, setFormState] = useState({
     username: '',

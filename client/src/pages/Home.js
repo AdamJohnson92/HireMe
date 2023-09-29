@@ -4,10 +4,11 @@ import React, { useState } from 'react'
 import candidate from '../assets/candidate.png'
 import employer from "../assets/employer.png";
 import Header from '../Components/Header';
-import Profile from '../Components/Profile';
+import Profile from './Profile';
 import Footer from '../Components/Footer'
 import { createContext } from "react";
 import Welcome from '../Components/Welcome'
+import InspectCandidate from '../Components/InspectCandidate';
 
 export const UserContext = createContext();
 export const ArrayContext = createContext();
@@ -19,7 +20,8 @@ function Home() {
     email: 'homer@doh.com',
     location: 'Springfield',
     education: ['Oxford'],
-    skills: ['Javascript', 'React', 'Node', 'MERN Stack', 'Donut Consumption']
+    skills: ['Javascript', 'React', 'Node', 'MERN Stack', 'Donut Consumption'],
+    isEmployer: false
   }
 
   const oscar = {
@@ -28,23 +30,34 @@ function Home() {
     email: 'oscar@grumble.com',
     location: 'Seseme Street',
     education: ['Cambridge'],
-    skills: ['Handlebars', 'Garbage']
+    skills: ['Handlebars', 'Garbage'],
+    isEmployer: false
+  }
+
+  const employerTest = {
+    firsName: 'Business Inc.',
+    email: 'business@inc.com',
+    isEmployer: true
   }
 
   const candidateArray = [homer, oscar]
   const [candidateLoggedIn, setCandidateLoggedIn] = useState(false)
-  const [user, setUser] = useState(candidateArray[1])
+  //upon login, setUser to update the Context Provider.
+  const [user, setUser] = useState(homer)
+
 
   return (
     <div className="hire-app">
       <UserContext.Provider value={user}>
-        {/* <Header></Header> */}
+
+        <Header></Header>
         <ArrayContext.Provider value={candidateArray}>
           {/* Two columns with images for reviews */}
-          
           <Welcome />
-          {/* <Profile/> */}
+          <Profile />
+          <InspectCandidate></InspectCandidate>
         </ArrayContext.Provider>
+
       </UserContext.Provider>
       <Footer />
 

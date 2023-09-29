@@ -1,16 +1,16 @@
-import React, { useState, useContext } from "react";
-import { UserContext } from "../pages/Home";
-import CandidatePage from "./CandidatePage";
-import EmployerPage from "./EmployerPage";
+// import React, { useState, useContext } from "react";
+// import { UserContext } from "../pages/Home";
+// import CandidatePage from "./CandidatePage";
+// import EmployerPage from "./EmployerPage";
 
-export default function Profile(){
+// export default function Profile(){
     
-    const user = useContext(UserContext)
+//     const user = useContext(UserContext)
 
-    return(
-        <>
-            <CandidatePage></CandidatePage>
-            <EmployerPage></EmployerPage>
-        </>
-    )
-}
+//     return(
+//         <>
+//             <CandidatePage></CandidatePage>
+//             <EmployerPage></EmployerPage>
+//         </>
+//     )
+// }
