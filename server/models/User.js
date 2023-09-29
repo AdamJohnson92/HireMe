@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const { Schema, model } = mongoose;
-const Skills = require('./Skills');
+//const Skills = require('./Skills');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({

@@ -19,10 +19,30 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { firstName, lastName, email, password }) => {
-      const user = await User.create({ firstName, lastName, email, password});
+    addUser: async (parent, {firstName, lastName, email, password, isEmployer, userCity, userState, education, skills }) => {
+      console.log("Received values:", { firstName, lastName, email, password, isEmployer, userCity, userState, education, skills });
+      //Checks that all fields are given to create a user
+      if (!email || !password || isEmployer === null) {
+      throw new AuthenticationError('Email, Password, and Employer status required!');
+      }
+      // Attempt to create the user
+      let user;
+      try {
+        user = await User.create({ firstName, lastName, email, password, isEmployer, userCity, userState, education, skills });
+      } 
+      catch (error) {
+      // Handle duplicate email error
+      if (error.code === 11000) {
+          throw new AuthenticationError('A user with this email already exists!');
+      }
+      console.error(error); 
+      throw new Error(error.message);
+      }
+      // Sign a token for the new user
       const token = signToken(user);
+
       return { token, user };
+    
     },
     //need two different login mutations? Must discuss.
     login: async (parent, { email, password }) => {
