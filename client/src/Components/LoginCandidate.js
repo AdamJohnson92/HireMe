@@ -6,47 +6,38 @@ import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 export default function Login() {
-    const [login, { error, data }] = useMutation(LOGIN_USER);
-    const [emailForm, setEmailForm] = useState('');
-    const [passwordForm, setPasswordForm] = useState('');
+    const [formState, setFormState] = useState({ email: '', password: '' });
+  const [login, { error, data }] = useMutation(LOGIN_USER);
 
-    const handleInputChange = (event) => {
-        const inputName = event.target.name;
-        const inputValue = event.target.value;
+  // update state based on form input changes
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
-        if (inputName === 'email') {
-            setEmailForm(inputValue);
-        } else if (inputName === 'password') {
-            setPasswordForm(inputValue);
-        }
-    }
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const validEmailRegex = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
 
-        const emailCheck = validEmailRegex.test(emailForm);
-        if (emailCheck === false) {
-            window.alert('Not a valid email address');
-        }
-        if (!emailForm || !passwordForm) {
-            window.alert('All fields must be complete.');
-        }
-        if (emailCheck === true && emailForm && passwordForm) {
-            try {
-                const { data } = await login({
-                  variables: { ...emailForm, ...passwordForm },
-                });
-          
-                Auth.login(data.login.token);
-              } catch (e) {
-                console.error(e);
-              }
-
-            setEmailForm('');
-            setPasswordForm('');
-        }
-    }
+        try {
+            const { data } = await login({
+              variables: { ...formState },
+            });
+      
+            Auth.login(data.login.token);
+          } catch (e) {
+            console.error(e);
+          }
+      
+          // clear form values
+          setFormState({
+            email: '',
+            password: '',
+          });
+        };
 
     const formStyle = {
         width: '300px',
@@ -67,10 +58,10 @@ export default function Login() {
 <h2 style={{ color: '#5271FF', textAlign: 'center', paddingBottom: '10px', paddingTop: '30px' }}>Candidate Login</h2>
             <form className="login-form" onSubmit={handleSubmit} style={formStyle}>
                 <label className='form-label' htmlFor='email' style={labelStyle}>Email:</label>
-                <input className='form-box' type='text' name='email' value={emailForm || ''} onChange={handleInputChange} />
+                <input className='form-box' type='text' name='email' value={formState.email || ''} onChange={handleChange} />
 
                 <label className='form-label' htmlFor='password' style={labelStyle}>Password:</label>
-                <input className='form-box' id='password-box' type='password' name='password' value={passwordForm || ''} onChange={handleInputChange} />
+                <input className='form-box' id='candidate-password' type='password' name='password' value={formState.password || ''} onChange={handleChange} />
 
                 <input className='custom-btn' type='submit' value='Login' style={{ display: 'block', margin: '20px auto 0' }} />
             </form>

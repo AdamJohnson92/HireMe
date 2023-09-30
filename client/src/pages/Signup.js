@@ -27,6 +27,17 @@ const Signup = () => {
     });
   };
 
+  function handleCheckChange() {
+    setFormState(
+      {
+        ...formState,
+        isEmployer: !formState.isEmployer
+      }
+    )
+    console.log(formState)
+  }
+
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
@@ -111,13 +122,14 @@ const Signup = () => {
                   />
                 </div>
                 <div className="mb-3">
-                Are you an employer? <input
-                    className="form-box"
-                    name="isEmployer"
-                    type="checkbox"
-                    defaultChecked={false}
-                    value={formState.isEmployer}
-                    style={inputStyle}
+                Are you an employer?<input
+                className="form-box"
+                name="isEmployer"
+                type="checkbox"
+                value={formState.isEmployer}
+                onChange={handleCheckChange}
+                checked={formState.isEmployer}
+                style={inputStyle}
                   />
                   </div>
                 <button
