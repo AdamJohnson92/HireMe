@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import "../App.css";
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
+
+import Auth from '../utils/auth';
 
 export default function LoginEmployer() {
+    const [login, { error, data }] = useMutation(LOGIN_USER);
     const [emailFormEmployer, setEmailFormEmployer] = useState('');
     const [passwordFormEmployer, setPasswordFormEmployer] = useState('');
 
@@ -16,7 +21,7 @@ export default function LoginEmployer() {
         }
     }
 
-    const handleSubmitEmployer = (event) => {
+    const handleSubmitEmployer = async (event) => {
         const validEmailRegex = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
 
         const emailCheck = validEmailRegex.test(emailFormEmployer);
@@ -29,7 +34,15 @@ export default function LoginEmployer() {
         event.preventDefault();
 
         if (emailCheck === true && emailFormEmployer && passwordFormEmployer) {
-            window.alert('Logging in Test');
+            try {
+                const { data } = await login({
+                  variables: { ...emailFormEmployer, ...passwordFormEmployer },
+                });
+          
+                Auth.login(data.login.token);
+              } catch (e) {
+                console.error(e);
+              }
 
             setEmailFormEmployer('');
             setPasswordFormEmployer('');

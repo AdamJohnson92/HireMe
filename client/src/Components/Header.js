@@ -52,8 +52,8 @@ export default function Header() {
             <div style={buttonStyle}>
                 {Auth.loggedIn() ? (
                     <>
-                        <Link className="btn btn-lg btn-info m-2" to="/me">
-                            {Auth.getProfile().data.username}'s profile
+                        <Link className="btn btn-lg btn-info m-2" to="/profile">
+                            {Auth.getProfile().data.firstName}'s profile
                         </Link>
                         <button className="custom-btn" onClick={logout} style={centeredText}>
                             Logout

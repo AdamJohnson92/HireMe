@@ -16,23 +16,23 @@ export default function Profile(){
             return <CandidatePage></CandidatePage>
         }
     }
-    const { username: userParam } = useParams();
+    const { firstName: userParam } = useParams();
 
     const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-      variables: { username: userParam },
+      variables: { firstName: userParam },
     });
   
     const user = data?.me || data?.user || {};
     // navigate to personal profile page if username is yours
-    if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-      return <Navigate to="/me" />;
+    if (Auth.loggedIn() && Auth.getProfile().data.firstName === userParam) {
+      return <Navigate to="/profile" />;
     }
   
     if (loading) {
       return <div>Loading...</div>;
     }
   
-    if (!user?.username) {
+    if (!user?.firstName) {
       return (
         <h4 style={{ marginTop: '275px' }}>
           You need to be logged in to see this. Use the navigation links above to
@@ -40,9 +40,12 @@ export default function Profile(){
         </h4>
       );
     }
+<<<<<<< Updated upstream
     return (
         <div className="profile">
             {renderPage()}
         </div>
     )
+=======
+>>>>>>> Stashed changes
 }

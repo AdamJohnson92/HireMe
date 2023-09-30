@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import "../App.css";
 
 import { useMutation } from '@apollo/client';
@@ -65,13 +64,7 @@ const Signup = () => {
       <div className="col-12 col-lg-6">
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
-          <div className="card-body">
-            {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
+          <div className="card-body" style={{ marginTop: '175px' }}>
               <form onSubmit={handleFormSubmit}>
                 <div className="mb-3">
                   <input
@@ -118,13 +111,12 @@ const Signup = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <p>Are you an employer?</p>
-                  <input
+                Are you an employer? <input
                     className="form-box"
                     name="isEmployer"
                     type="checkbox"
+                    defaultChecked={false}
                     value={formState.isEmployer}
-                    onChange={handleChange}
                     style={inputStyle}
                   />
                   </div>
@@ -136,8 +128,6 @@ const Signup = () => {
                   Submit
                 </button>
               </form>
-            )}
-
             {error && (
               <div className="my-3 p-3 bg-danger text-white">
                 {error.message}

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import candidate from "../assets/candidate.png";
 import "../App.css";
-import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
@@ -67,12 +65,6 @@ export default function Login() {
         <div className="login-column">            
 
 <h2 style={{ color: '#5271FF', textAlign: 'center', paddingBottom: '10px', paddingTop: '30px' }}>Candidate Login</h2>
-{data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
             <form className="login-form" onSubmit={handleSubmit} style={formStyle}>
                 <label className='form-label' htmlFor='email' style={labelStyle}>Email:</label>
                 <input className='form-box' type='text' name='email' value={emailForm || ''} onChange={handleInputChange} />
@@ -82,6 +74,10 @@ export default function Login() {
 
                 <input className='custom-btn' type='submit' value='Login' style={{ display: 'block', margin: '20px auto 0' }} />
             </form>
+            {error && (
+              <div className="my-3 p-3 bg-danger text-white">
+                {error.message}
+              </div>
             )}
         </div>
         </div>
