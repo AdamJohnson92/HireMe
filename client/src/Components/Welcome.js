@@ -60,7 +60,7 @@ export default function Welcome() {
                 {/* Video */}
                 <video
                     src={welcomeVideo}
-                    autoPlay // Auto play on page load
+                    // autoPlay // Auto play on page load
                     className="welcome-video"
                     width="400"
                     height="450"
