@@ -8,42 +8,47 @@ import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
 import Auth from '../utils/auth';
 
-export default function Profile(){
-    function renderPage(){
-        if(user.isEmployer === true) {
-            return <EmployerPage></EmployerPage>
-        } else {
-            return <CandidatePage></CandidatePage>
-        }
-    }
-    const { firstName: userParam } = useParams();
+export default function Profile() {
 
-    const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-      variables: { firstName: userParam },
-    });
-  
-    const user = data?.me || data?.user || {};
-    // navigate to personal profile page if username is yours
-    if (Auth.loggedIn() && Auth.getProfile().data.firstName === userParam) {
-      return <Navigate to="/profile" />;
+  // const [me, setMe] = useState({})
+  function renderPage() {
+    if (user.isEmployer === true) {
+      return <EmployerPage></EmployerPage>
+    } else {
+      console.log(user)
+      return <CandidatePage user={user}></CandidatePage>
     }
-  
-    if (loading) {
-      return <div>Loading...</div>;
-    }
-  
-    if (!user?.firstName) {
-      return (
-        <h4 style={{ marginTop: '275px' }}>
-          You need to be logged in to see this. Use the navigation links above to
-          sign up or log in!
-        </h4>
-      );
-    }
+  }
+  const { firstName: userParam } = useParams();
 
+  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+    variables: { firstName: userParam },
+  });
+
+  const user = data?.me || data?.user || {};
+  // navigate to personal profile page if username is yours
+  if (Auth.loggedIn() && Auth.getProfile().data.firstName === userParam) {
+    // setMe(user)
+    return <div className="profile">
+      
+      {renderPage()}
+    </div>;
+  }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user?.firstName) {
     return (
-        <div className="profile">
-            {renderPage()}
-        </div>
-    )
+      <h4 style={{ marginTop: '275px' }}>
+        You need to be logged in to see this. Use the navigation links above to
+        sign up or log in!
+      </h4>
+    );
+  }
+
+  // return (
+        
+  //   )
 }

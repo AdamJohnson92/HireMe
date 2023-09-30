@@ -17,6 +17,12 @@ export const QUERY_ME = gql`
       firstName
       lastName
       email
+      education
+      userCity
+      userState
+     skills{
+      name
+     }
     }
   }
 `;
