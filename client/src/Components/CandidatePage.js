@@ -40,6 +40,14 @@ export default function CandidatePage(user) {
     }
   };
 
+  let skillArray = []
+  function handleSkillArray(){
+    for(let i = 0; i < user.user.skills.length; i++){
+      skillArray.push(user.user.skills[i].name)
+    }
+    console.log(skillArray)
+  }
+  handleSkillArray()
 
   return (
     <div className="candidate-profile">
@@ -51,12 +59,13 @@ export default function CandidatePage(user) {
       <h4>Education: {user.user.education}</h4>
       <h3>Skills:</h3>
       <ul>
-        {user.user.skills.map((skill) => (
+        {skillArray.map((skill) => (
           <li>
-            {skill.name}
+            {skill}
             {!user.isEmployer ? <button className="btn"> X </button> : <></>}
           </li>
         ))}
+        {/* {renderSkills()} */}
       </ul>
 
       <form className="skill-form" onSubmit={handleSkillSubmit}>
