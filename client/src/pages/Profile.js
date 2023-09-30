@@ -40,12 +40,10 @@ export default function Profile(){
         </h4>
       );
     }
-<<<<<<< Updated upstream
+
     return (
         <div className="profile">
             {renderPage()}
         </div>
     )
-=======
->>>>>>> Stashed changes
 }
