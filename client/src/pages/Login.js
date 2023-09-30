@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
+import React from 'react';
 import LoginCandidate from '../Components/LoginCandidate'
 import LoginEmployer from '../Components/LoginEmployer'
 
@@ -13,7 +10,7 @@ import Auth from '../utils/auth';
 const Login = (props) => {
 
   return (
-    <main className="flex-row justify-center mb-4">
+    <main className="flex-row justify-center mb-4" style={{ marginTop: '275px' }}>
       <LoginCandidate />
       <LoginEmployer />
     </main>
