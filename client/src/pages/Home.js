@@ -20,7 +20,7 @@ function Home() {
     email: 'homer@doh.com',
     locationCity: 'Springfield',
     locationState: 'Illinois',
-    education: ['Oxford', 'Harvard'],
+    education: 'Oxford',
     skills: ['Javascript', 'React', 'Node', 'MERN Stack', 'Donut Consumption'],
     isEmployer: false
   }
@@ -31,7 +31,7 @@ function Home() {
     email: 'oscar@grumble.com',
     locationCity: 'Seseme Street',
     locationState: 'Wyoming',
-    education: ['Cambridge', 'Yale'],
+    education: 'Cambridge',
     skills: ['Handlebars', 'Garbage'],
     isEmployer: false
   }

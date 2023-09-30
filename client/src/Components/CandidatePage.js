@@ -1,6 +1,5 @@
 import { UserContext } from "../pages/Home";
 import Skill from './Skill'
-import Education from "./Education";
 import React, { useContext, useState } from "react";
 
 export default function CandidatePage() {
@@ -25,21 +24,6 @@ export default function CandidatePage() {
         }
       }
 
-      const handleEduSubmit = async (event) => {
-        event.preventDefault();
-    
-        try { 
-            //Must add mutations!!
-        //   const { data } = await addThought({
-        //     variables: { ...formState },
-        //   });
-       
-          setEduForm('');
-        } catch (err) {
-          console.error(err);
-        }
-      };
-
       const handleSkillSubmit = async (event) => {
         event.preventDefault();
     
@@ -63,26 +47,7 @@ export default function CandidatePage() {
             <h1> Hello, {user.firstName}!</h1>
             <button className="btn">Edit Profile</button>
             <h3> Location: {user.locationCity}, {user.locationState}</h3>
-            <h4>Education:
-                <ul>
-                    <Education></Education>
-                </ul>
-            </h4>
-
-            <form className="education-form" onSubmit={handleEduSubmit}>
-                <label className='form-label' htmlFor='message'>
-                    <textarea
-                        className='canidate-form-box'
-                        type='text'
-                        name='addEducation'
-                        placeholder="Add an Educational Institution"
-                        value={eduForm || ''}
-                        onChange={handleInputChange}
-                    >
-                    </textarea></label>
-                <input className='btn' type='submit' value='Submit' />
-            </form>
-
+            <h4>Education: {user.education}</h4>
             <h3>Skills:</h3>
             <ul>
                 <Skill></Skill>
