@@ -40,14 +40,21 @@ export default function CandidatePage(user) {
     }
   };
 
-  let skillArray = []
-  function handleSkillArray(){
-    for(let i = 0; i < user.user.skills.length; i++){
-      skillArray.push(user.user.skills[i].name)
+  let skillArray = [];
+
+  function handleSkillArray() {
+    if (user.user.skills && Array.isArray(user.user.skills)) {
+      for (let i = 0; i < user.user.skills.length; i++) {
+        skillArray.push(user.user.skills[i].name);
+      }
+    } else {
+      // Set skillArray as an empty array
+      skillArray = [];
     }
-    console.log(skillArray)
+    console.log(skillArray);
   }
-  handleSkillArray()
+
+  handleSkillArray();
 
   return (
     <div className="candidate-profile">
