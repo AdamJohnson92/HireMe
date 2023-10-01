@@ -12,16 +12,13 @@ export default function CandidatePage(user) {
   // const user = useContext(UserContext)
   const [skillForm, setSkillForm] = useState('')
 
-
   const handleInputChange = (event) => {
     const inputName = event.target.name;
     const inputValue = event.target.value
 
-
     if (inputName === 'addSkill') {
       setSkillForm(inputValue)
       console.log(inputValue)
-
     }
   }
 
@@ -29,7 +26,7 @@ export default function CandidatePage(user) {
     event.preventDefault();
 
     try {
-      //Must add mutations!!
+      // Must add mutations!!
       //   const { data } = await addThought({
       //     variables: { ...formState },
       //   });
@@ -57,20 +54,20 @@ export default function CandidatePage(user) {
   handleSkillArray();
 
   return (
-    <div className="candidate-profile">
-      <h2>Candidate Profile</h2>
+    <div className="candidate-profile" style={{ marginLeft: '30px' }}>
+<h2 style={{ color: '#5271FF', marginTop: '90px', textAlign: 'center' }}>Candidate Profile</h2>
 
       <h1> Hello, {user.user.firstName}!</h1>
       <button className="btn">Edit Profile</button>
       <h3> Location: {user.user.userCity}, {user.user.userState}</h3>
-      <h4>Education: {user.user.education}</h4>
+      <h3>Education: {user.user.education}</h3>
       <h3>Skills:</h3>
       <ul>
         {skillArray.map((skill) => (
           <li>
             {skill}
-            {!user.isEmployer ? <button className="btn"> X </button> : <></>}
-          </li>
+            {!user.isEmployer ? <button className="btn" style={{ width: '10px', height: '15px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginLeft: "5px" }}>X</button> : <></>}
+                      </li>
         ))}
         {/* {renderSkills()} */}
       </ul>
@@ -85,8 +82,9 @@ export default function CandidatePage(user) {
             value={skillForm || ''}
             onChange={handleInputChange}
           >
-          </textarea></label>
-
+          </textarea>
+        </label>
+        <br /> 
         <input className='btn' type='submit' value='Submit' />
       </form>
     </div>

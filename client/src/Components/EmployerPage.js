@@ -24,7 +24,7 @@ export default function EmployerPage() {
             </form>
 
             <div className="columns">
-                <h2>Employer Page </h2>
+                <h2 style={{ color: '#5271FF', marginTop: '90px', textAlign: 'center' }}>Employer Page </h2>
                 <Card></Card>
             </div>
         </>
