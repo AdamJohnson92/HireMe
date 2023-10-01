@@ -9,10 +9,9 @@ export default function Welcome() {
         <main className="main">
             {/* Introduction paragraph */}
             <div className="background-image">
-                <div className="introduction-container" style={{ marginBottom: "50px" }}>
+                <div className="introduction-container" style={{ marginBottom: "50px", fontWeight: "bold" }}>
                     <p className="introduction">
-                        <span className="introduction-title">Welcome to Hire Me!</span>
-                        <br />
+                        <h2 className="introduction-title" style={{ color: '#5271FF', marginBottom: "0px" }}>Welcome to Hire Me!</h2>
                         <br />
                         Your platform for connecting with the perfect job candidates. Hire Me
                         empowers employers to effortlessly search and connect with active job

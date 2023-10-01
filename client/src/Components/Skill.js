@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UserContext, ArrayContext } from "../pages/Home";
 
-export default function Skill(user){
+export default function Skill(user) {
     console.log(user.user.user.skills)
 
     // const user = useContext(UserContext)
@@ -19,15 +19,15 @@ export default function Skill(user){
 
     // const handleRender = checkViewer()
 
-    return(
+    return (
 
         <>
-        {user.user.user.skills.map((skill) => (
-           <li>
-            {skill}
-            {!user.isEmployer? <button className="btn"> X </button> : <></>}
-           </li> 
-        ))}
+            {user.user.user.skills.map((skill) => (
+                <li>
+                    {skill}
+                    {!user.isEmployer ? <button className="btn"> X </button> : <></>}
+                </li>
+            ))}
         </>
     )
 

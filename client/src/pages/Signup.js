@@ -63,7 +63,7 @@ const Signup = () => {
   };
 
   const mainStyle = {
-    marginTop: '80px',
+    marginTop: '170px',
     display: 'flex',
     justifyContent: 'center', 
     alignItems: 'center', 
@@ -74,8 +74,8 @@ const Signup = () => {
     <main className="flex-row justify-center mb-4" style={mainStyle}>
       <div className="col-12 col-lg-6">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
-          <div className="card-body" style={{ marginTop: '175px' }}>
+          <h2 className="card-header bg-dark text-light p-2" style={{ color: '#5271FF' }}>Sign Up</h2>
+          <div className="card-body" style={{ marginTop: '5px' }}>
               <form onSubmit={handleFormSubmit}>
                 <div className="mb-3">
                   <input
@@ -113,7 +113,7 @@ const Signup = () => {
                 <div className="mb-3">
                   <input
                     className="form-box"
-                    placeholder="******"
+                    placeholder="Your password"
                     name="password"
                     type="password"
                     value={formState.password}
@@ -129,7 +129,7 @@ const Signup = () => {
                 value={formState.isEmployer}
                 onChange={handleCheckChange}
                 checked={formState.isEmployer}
-                style={inputStyle}
+                style={{inputStyle, width: '40px'}}
                   />
                   </div>
                 <button
