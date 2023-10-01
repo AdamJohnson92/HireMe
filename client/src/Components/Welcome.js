@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import candidate from "../assets/candidate.png";
 import employer from "../assets/employer.png";
-import welcomeVideo from "../assets/WelcomeHireMe.mp4"; // Import the video
+import welcomeVideo from "../assets/WelcomeHireMe.mp4"; 
 
 export default function Welcome() {
     return (

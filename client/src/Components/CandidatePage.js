@@ -1,92 +1,87 @@
 import { UserContext } from "../pages/Home";
-import Skill from './Skill'
-import { useQuery } from "@apollo/client";
-import React, { useContext, useState } from "react";
+import Skill from './Skill';
+import React, { useContext, useState, useEffect } from "react";
 import { QUERY_ME } from "../utils/queries";
+import JohnWick from "../assets/JohnWick.jpg";
 
 export default function CandidatePage(user) {
-  console.log(user.user)
-
-  console.log(user.user.skills)
-
-  // const user = useContext(UserContext)
-  const [skillForm, setSkillForm] = useState('')
+  const [skillForm, setSkillForm] = useState('');
+  const [skills, setSkills] = useState([]);
 
   const handleInputChange = (event) => {
     const inputName = event.target.name;
-    const inputValue = event.target.value
+    const inputValue = event.target.value;
 
     if (inputName === 'addSkill') {
-      setSkillForm(inputValue)
-      console.log(inputValue)
+      setSkillForm(inputValue);
     }
   }
 
-  const handleSkillSubmit = async (event) => {
+  const handleSkillSubmit = (event) => {
     event.preventDefault();
 
-    try {
-      // Must add mutations!!
-      //   const { data } = await addThought({
-      //     variables: { ...formState },
-      //   });
-
+    if (skillForm.trim() !== '') {
+      setSkills([...skills, skillForm]);
       setSkillForm('');
-    } catch (err) {
-      console.error(err);
     }
   };
 
-  let skillArray = [];
-
-  function handleSkillArray() {
+  useEffect(() => {
     if (user.user.skills && Array.isArray(user.user.skills)) {
-      for (let i = 0; i < user.user.skills.length; i++) {
-        skillArray.push(user.user.skills[i].name);
-      }
+      const skillNames = user.user.skills.map((skill) => skill.name);
+      setSkills(skillNames);
     } else {
-      // Set skillArray as an empty array
-      skillArray = [];
+      setSkills([]);
     }
-    console.log(skillArray);
-  }
-
-  handleSkillArray();
+  }, [user.user.skills]);
 
   return (
-    <div className="candidate-profile" style={{ marginLeft: '30px' }}>
-<h2 style={{ color: '#5271FF', marginTop: '90px', textAlign: 'center' }}>Candidate Profile</h2>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '275px' }}>
+      <div style={{ marginLeft: '30px' }}>
+        <h1> Hello, {user.user.firstName}!</h1>
+        <button className="btn">Edit Profile</button>
+        <h3> Location: {user.user.userCity}, {user.user.userState}</h3>
+        <h3>Education: {user.user.education}</h3>
+        <h3>Skills:</h3>
+        <ul>
+          {skills.map((skill, index) => (
+            <li key={index}>
+              {skill}
+              {!user.isEmployer ? <button className="btn" style={{ width: '10px', height: '15px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginLeft: "5px" }}>X</button> : <></>}
+            </li>
+          ))}
+        </ul>
 
-      <h1> Hello, {user.user.firstName}!</h1>
-      <button className="btn">Edit Profile</button>
-      <h3> Location: {user.user.userCity}, {user.user.userState}</h3>
-      <h3>Education: {user.user.education}</h3>
-      <h3>Skills:</h3>
-      <ul>
-        {skillArray.map((skill) => (
-          <li>
-            {skill}
-            {!user.isEmployer ? <button className="btn" style={{ width: '10px', height: '15px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginLeft: "5px" }}>X</button> : <></>}
-                      </li>
-        ))}
-        {/* {renderSkills()} */}
-      </ul>
+        <form className="skill-form" onSubmit={handleSkillSubmit}>
+          <label className='form-label' htmlFor='addSkill'>
+            <textarea
+              className='candidate-form-box'
+              type='text'
+              id='addSkill'
+              name='addSkill'
+              placeholder="Add a Skill"
+              value={skillForm || ''}
+              onChange={handleInputChange}
+            >
+            </textarea>
+          </label>
+          <br />
+          <input className='btn' type='submit' value='Submit' />
+        </form>
+      </div>
 
-      <form className="skill-form" onSubmit={handleSkillSubmit}>
-        <label className='form-label' htmlFor='skill'>
-          <textarea
-            className='canidate-form-box'
-            type='text'
-            name='addSkill'
-            placeholder="Add a Skill"
-            value={skillForm || ''}
-            onChange={handleInputChange}
-          >
-          </textarea>
-        </label>
-        <br /> 
-        <input className='btn' type='submit' value='Submit' />
-      </form>
+      {/* Profile Image with marginTop */}
+      <img
+        src={JohnWick}
+        alt="ProfileImage"
+        style={{
+          width: '200px',
+          height: '210px',
+          borderRadius: '50%',
+          marginRight: '70px',
+          marginTop: '-200px', // this moves the image up (or down)
+        }}
+      />
     </div>
-  )
+  );
 }
