@@ -54,7 +54,9 @@ export default function Header() {
                     <>
                         <Link className="btn btn-lg btn-info m-2" to="/profile">
                             {Auth.getProfile().data.firstName}'s profile
+                            {console.log(Auth.getProfile().data.firstName)}
                         </Link>
+                        
                         <button className="custom-btn" onClick={logout} style={centeredText}>
                             Logout
                         </button>
