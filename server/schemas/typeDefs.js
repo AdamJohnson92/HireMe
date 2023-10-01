@@ -34,9 +34,8 @@ const typeDefs = gql`
     updateUserCity(email: String!, newCity: String!): User
     updateUserState(email: String!, newState: String!): User
     updateEdu(email: String!, newEdu: String!): User
-    addSkills(email: String!, newSkills: [String]): User
-    removeSkills(email: String!, oldSkills: [String]): User
-
+    addSkill(email: String!, newSkill: String!): User
+    removeSkill(email: String!, oldSkill: String!): User
   }
 `;
 
