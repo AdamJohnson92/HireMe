@@ -27,8 +27,18 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_SKILL = gql`
-  mutation AddSkill($email: String!, $newSkill: String!) {
+  mutation addSkill($email: String!, $newSkill: String!) {
   addSkill(email: $email, newSkill: $newSkill) {
+    skills {
+      name
+    }
+  }
+}
+`;
+
+export const REMOVE_SKILL = gql`
+mutation removeSkill($email: String!, $oldSkill: String!) {
+  removeSkill(email: $email, oldSkill: $oldSkill) {
     skills {
       name
     }
