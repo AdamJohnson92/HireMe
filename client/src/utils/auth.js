@@ -29,12 +29,12 @@ class AuthService {
 
   login(idToken) {
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/');
+    window.location.href = '/employer'; // Redirect to the Employer page
   }
 
   logout() {
     localStorage.removeItem('id_token');
-    window.location.reload();
+    window.location.href = '/login'; // Redirect to the login page
   }
 }
 
