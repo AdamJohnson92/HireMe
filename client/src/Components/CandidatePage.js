@@ -1,12 +1,15 @@
-import { UserContext } from "../pages/Home";
 import Skill from './Skill'
-import { useMutation, useQuery } from "@apollo/client";
-import React, { useContext, useState, useEffect } from "react";
+import { UserContext } from '../pages/Profile';
+import { useMutation} from "@apollo/client";
+import React, { useContext, useState, useEffect, createContext } from "react";
 import { QUERY_ME } from "../utils/queries";
 import JohnWick from "../assets/JohnWick.jpg";
 import { ADD_SKILL } from "../utils/mutations";
 
-export default function CandidatePage(user) {
+
+export default function CandidatePage() {
+
+  const user = useContext(UserContext)
   const [skillForm, setSkillForm] = useState('');
   const [skills, setSkills] = useState([]);
 
@@ -24,9 +27,9 @@ export default function CandidatePage(user) {
     event.preventDefault();
 
     try {
-      await addSkillMutation({
+      addSkillMutation({
         variables: {
-          email: user.user.email,
+          email: user.email,
           newSkill: skillForm,
         },
         // Update the cache to include the newly added skill
@@ -48,21 +51,21 @@ export default function CandidatePage(user) {
   };
 
   useEffect(() => {
-    if (user.user.skills && Array.isArray(user.user.skills)) {
-      const skillNames = user.user.skills.map((skill) => skill.name);
+    if (user.skills && Array.isArray(user.skills)) {
+      const skillNames = user.skills.map((skill) => skill.name);
       setSkills(skillNames);
     } else {
       setSkills([]);
     }
-  }, [user.user.skills]);
+  }, [user.skills]);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '275px' }}>
+    <div className="candidate-profile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '275px' }}>
       <div style={{ marginLeft: '30px' }}>
-        <h1> Hello, {user.user.firstName}!</h1>
+        <h1> Hello, {user.firstName}!</h1>
         <button className="btn">Edit Profile</button>
-        <h3> Location: {user.user.userCity}, {user.user.userState}</h3>
-        <h3>Education: {user.user.education}</h3>
+        <h3> Location: {user.userCity}, {user.userState}</h3>
+        <h3>Education: {user.education}</h3>
         <h3>Skills:</h3>
         <ul>
           {skills.map((skill, index) => (
