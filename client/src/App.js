@@ -17,6 +17,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import EmployerPage from './Components/EmployerPage';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -48,25 +49,14 @@ function App() {
         <div className="flex-column justify-flex-start min-100-vh">
           <Header />
           <div className="container">
-            <Routes>
-              <Route 
-                path="/"
-                element={<Home />}
-              />
-              <Route 
-                path="/login" 
-                element={<Login />}
-              />
-              <Route 
-                path="/signup" 
-                element={<Signup />}
-              />
-              <Route 
-                path="/profile" 
-                element={<Profile />}
-              />
-              </Routes>
-              </div>
+          <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/employer" element={<EmployerPage />} /> 
+            </Routes>              
+            </div>
           <Footer />
         </div>
               </Router>

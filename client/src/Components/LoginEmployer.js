@@ -27,7 +27,12 @@ export default function LoginEmployer() {
                 variables: { ...formState },
               });
         
+              console.log("Received token:", data.login.token); // Log the received token
               Auth.login(data.login.token);
+
+              // Log the user role set by Auth.login
+              console.log("User role:", Auth.getProfile().role);
+
             } catch (e) {
               console.error(e);
             }
