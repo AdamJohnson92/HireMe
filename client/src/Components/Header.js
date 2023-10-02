@@ -6,7 +6,6 @@ import Auth from '../utils/auth';
 
 export default function Header() {
 
-    console.log(Auth.getProfile().data)
     const logout = (event) => {
         event.preventDefault();
         Auth.logout();
