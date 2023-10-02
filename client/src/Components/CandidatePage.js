@@ -1,10 +1,11 @@
 import Skill from './Skill'
 import { UserContext } from '../pages/Profile';
-import { useMutation} from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import React, { useContext, useState, useEffect, createContext } from "react";
 import { QUERY_ME } from "../utils/queries";
 import JohnWick from "../assets/JohnWick.jpg";
 import JohnWicksResume from "../assets/JohnWickResume.pdf"; // Import John Wick's resume PDF
+import EditCandidate from './EditProfile';
 
 import { ADD_SKILL, REMOVE_SKILL } from "../utils/mutations";
 
@@ -155,6 +156,7 @@ export default function CandidatePage() {
           marginTop: '-230px', // this moves the image up (or down)
         }}
       />
+       <EditCandidate user={user} style={{display: 'none'}}></EditCandidate>
 
       {/* Resume Popup */}
       {showResumePopup && (
@@ -166,6 +168,7 @@ export default function CandidatePage() {
           <embed src={JohnWicksResume} type='application/pdf' width='100%' height='500px' />
         </div>
       )}
+     
     </div>
   );
 }

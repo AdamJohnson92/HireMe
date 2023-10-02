@@ -144,6 +144,18 @@
   height:100%
 }
 
+.edit-candidate{
+  margin:10px;
+  border:5px solid #5271FF;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  height:400px;
+  gap: 10px;
+  align-items: right;
+}
+
 .btn {
   background-color: #5271FF;
   color: #fff;
