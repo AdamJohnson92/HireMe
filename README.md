@@ -31,9 +31,23 @@ Hire Me simplifies the hiring process, providing employers with an efficient way
 
 ## Screenshots
 
-Screenshot of pages will go here: 
+HOME PAGE:
+![Home Page](client/src/assets/HomePage.png)
 <br>
 <br>
+LOGIN PAGE:
+![Login Page](client/src/assets/loginpage.png)
+<br>
+<br>
+SIGNUP PAGE:
+![Signup Page](client/src/assets/SignupPage.png)
+<br>
+<br>
+CANDIDATE PROFILE:
+![Candidate Profile](client/src/assets/CandidateProfile.png)
+<br>
+<br>
+
 
 ## Technologies Used
 

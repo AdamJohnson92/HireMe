@@ -1,92 +1,171 @@
-import { UserContext } from "../pages/Home";
 import Skill from './Skill'
-import { useQuery } from "@apollo/client";
-import React, { useContext, useState } from "react";
+import { UserContext } from '../pages/Profile';
+import { useMutation} from "@apollo/client";
+import React, { useContext, useState, useEffect, createContext } from "react";
 import { QUERY_ME } from "../utils/queries";
+import JohnWick from "../assets/JohnWick.jpg";
+import JohnWicksResume from "../assets/JohnWickResume.pdf"; // Import John Wick's resume PDF
 
-export default function CandidatePage(user) {
-  console.log(user.user)
+import { ADD_SKILL, REMOVE_SKILL } from "../utils/mutations";
 
-  console.log(user.user.skills)
 
-  // const user = useContext(UserContext)
-  const [skillForm, setSkillForm] = useState('')
+export default function CandidatePage() {
+
+  const user = useContext(UserContext)
+  const [skillForm, setSkillForm] = useState('');
+  const [skills, setSkills] = useState([]);
+  const [showResumePopup, setShowResumePopup] = useState(false); // To control resume popup visibility
 
   const handleInputChange = (event) => {
     const inputName = event.target.name;
-    const inputValue = event.target.value
+    const inputValue = event.target.value;
 
     if (inputName === 'addSkill') {
-      setSkillForm(inputValue)
-      console.log(inputValue)
+      setSkillForm(inputValue);
     }
   }
+  const [addSkillMutation] = useMutation(ADD_SKILL);
 
+  // Make the handleSkillSubmit function async
   const handleSkillSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      // Must add mutations!!
-      //   const { data } = await addThought({
-      //     variables: { ...formState },
-      //   });
-
-      setSkillForm('');
+      const { data } = await addSkillMutation({
+        variables: {
+          email: user.email,
+          newSkill: skillForm,
+        },
+        // Update the cache to include the newly added skill
+        update: (cache, { data }) => {
+          const updatedUser = data.addSkill;
+          cache.writeQuery({
+            query: QUERY_ME,
+            data: {
+              me: updatedUser,
+            },
+          });
+        },
+      });
+      console.log(data.addSkill)
+      setSkillForm("");
     } catch (err) {
       console.error(err);
     }
   };
 
-  let skillArray = [];
 
-  function handleSkillArray() {
-    if (user.user.skills && Array.isArray(user.user.skills)) {
-      for (let i = 0; i < user.user.skills.length; i++) {
-        skillArray.push(user.user.skills[i].name);
-      }
-    } else {
-      // Set skillArray as an empty array
-      skillArray = [];
+  const [removeSkill] = useMutation(REMOVE_SKILL);
+
+  const handleRemoveSkill = async (skill) => {
+    try {
+      const { data } = await removeSkill({
+        variables: { email: user.email, oldSkill: skill },
+        update: (cache, { data }) => {
+          const updatedUser = data.removeSkill;
+          cache.writeQuery({
+            query: QUERY_ME,
+            data: {
+              me: updatedUser,
+            },
+          });
+        },
+      });
+    } catch (err) {
+      console.error(err);
     }
-    console.log(skillArray);
-  }
+  };
 
-  handleSkillArray();
+  useEffect(() => {
+    if (user.skills && Array.isArray(user.skills)) { // Access skills directly from the user object
+      const skillNames = user.skills.map((skill) => skill.name);
+      setSkills(skillNames);
+    } else {
+      setSkills([]);
+    }
+  }, [user.skills]);
+
+  const handleViewResumeClick = () => {
+    // When the "View Resume 📄" button is clicked, open the popup
+    setShowResumePopup(true);
+  };
+
+  const handleClosePopup = () => {
+    // Close the resume popup when the user clicks close or outside the popup
+    setShowResumePopup(false);
+  };
+
+  const handleResumeUpload = (event) => {
+    // Handle the file upload here
+    const file = event.target.files[0];
+    // You can add your logic for handling the uploaded file, e.g., send it to a server or display it.
+  };
 
   return (
-    <div className="candidate-profile" style={{ marginLeft: '30px' }}>
-<h2 style={{ color: '#5271FF', marginTop: '90px', textAlign: 'center' }}>Candidate Profile</h2>
+    <div className="candidate-profile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '275px' }}>
+      <div style={{ marginLeft: '80px' }}>
+        <h1> Hello, {user.firstName}!</h1>
+        <button className="btn">Edit Profile</button>
+        <h3> Location: {user.userCity}, {user.userState}</h3>
+        <h3>Education: {user.education}</h3>
+        <h3>Skills:</h3>
+        <ul>
+          {skills.map((skill, index) => (
+            <li key={index}>
+              {skill}
+              {!user.isEmployer ? <button className="btn" style={{ width: '10px', height: '15px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginLeft: "5px" }} onClick={() => handleRemoveSkill(skill)}>X</button> : <></>}
+            </li>
+          ))}
+        </ul>
 
-      <h1> Hello, {user.user.firstName}!</h1>
-      <button className="btn">Edit Profile</button>
-      <h3> Location: {user.user.userCity}, {user.user.userState}</h3>
-      <h3>Education: {user.user.education}</h3>
-      <h3>Skills:</h3>
-      <ul>
-        {skillArray.map((skill) => (
-          <li>
-            {skill}
-            {!user.isEmployer ? <button className="btn" style={{ width: '10px', height: '15px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginLeft: "5px" }}>X</button> : <></>}
-                      </li>
-        ))}
-        {/* {renderSkills()} */}
-      </ul>
+        <form className='skill-form' onSubmit={handleSkillSubmit}>
+          <label className='form-label' htmlFor='addSkill'>
+            <textarea
+              className='candidate-form-box'
+              type='text'
+              id='addSkill'
+              name='addSkill'
+              placeholder="Add a Skill"
+              value={skillForm || ''}
+              onChange={handleInputChange}
+            ></textarea>
+          </label>
+          <br />
+          <input className='btn' type='submit' value='Submit' />
+        </form>
 
-      <form className="skill-form" onSubmit={handleSkillSubmit}>
-        <label className='form-label' htmlFor='skill'>
-          <textarea
-            className='canidate-form-box'
-            type='text'
-            name='addSkill'
-            placeholder="Add a Skill"
-            value={skillForm || ''}
-            onChange={handleInputChange}
-          >
-          </textarea>
-        </label>
-        <br /> 
-        <input className='btn' type='submit' value='Submit' />
-      </form>
+        {/* View Resume and Upload Resume Buttons */}
+        <button className='btn' onClick={handleViewResumeClick}>
+          View Resume 📄
+        </button>
+        <br />
+        <br />
+        <input type="file" accept=".pdf" onChange={handleResumeUpload} />
+      </div>
+
+      {/* Profile Image with marginTop */}
+      <img
+        src={JohnWick}
+        alt="ProfileImage"
+        style={{
+          width: '250px',
+          height: '250px',
+          borderRadius: '50%',
+          marginRight: '100px',
+          marginTop: '-230px', // this moves the image up (or down)
+        }}
+      />
+
+      {/* Resume Popup */}
+      {showResumePopup && (
+        <div className='resume-popup'>
+          <button onClick={handleClosePopup} className='close-popup'>
+            Close
+          </button>
+          {/* Display John Wick's Resume PDF */}
+          <embed src={JohnWicksResume} type='application/pdf' width='100%' height='500px' />
+        </div>
+      )}
     </div>
-  )
+  );
 }

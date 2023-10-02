@@ -84,42 +84,53 @@ const resolvers = {
       const updatedUser = await User.findOneAndUpdate({email}, { education: newEdu }, { new: true });
       return updatedUser;
     },
-    addSkills: async (parent, { email, newSkills }, context) => {
-      // if (!context.user) {
-      //   throw new AuthenticationError('You need to be logged in!');
-      // }
-      const existingSkills = await Skills.find({ name: { $in: newSkills } });
-      const existingSkillNames = existingSkills.map(skill => skill.name);
-      const skillsToBeAdded = newSkills.filter(skill => !existingSkillNames.includes(skill));
-
-      // Add new skills to the Skills collection
-      const newAddedSkills = await Skills.insertMany(skillsToBeAdded.map(name => ({ name })));
-
-      const allSkillIds = [...existingSkills, ...newAddedSkills].map(skill => skill._id);
-
-      // Update the user's skills array
-      const updatedUser = await User.findOneAndUpdate(
-        { email },
-        { $addToSet: { skills: { $each: allSkillIds } } },
-        { new: true }
-      ).populate('skills');
-
-      return updatedUser;
+    addSkill: async (parent, { email, newSkill }, context) => {
+      
+      const existingSkill = await Skills.findOne({ name: newSkill });
+    
+      if (!existingSkill) {
+        
+        const newSkillDocument = await Skills.create({ name: newSkill });
+    
+        // Add the new skill's ID to the user's skills array
+        const updatedUser = await User.findOneAndUpdate(
+          { email },
+          { $addToSet: { skills: newSkillDocument._id } },
+          { new: true }
+        ).populate('skills');
+    
+        return updatedUser;
+      } else {
+        // If the skill already exists, just add it to the user's skills array
+        const updatedUser = await User.findOneAndUpdate(
+          { email },
+          { $addToSet: { skills: existingSkill._id } },
+          { new: true }
+        ).populate('skills');
+    
+        return updatedUser;
+      }
     },
-    removeSkills: async (parent, { email, oldSkills }, context) => {
-      // Find the skill IDs from the Skills collection that match the names provided in oldSkills.
-      const skillsToRemove = await Skills.find({ name: { $in: oldSkills } });
-      const skillIdsToRemove = skillsToRemove.map(skill => skill._id);
+    
+    removeSkill: async (parent, { email, oldSkill }, context) => {
 
-      // Update the user's skills array by pulling these skill IDs.
-      const updatedUser = await User.findOneAndUpdate(
-        { email },
-        { $pull: { skills: { $in: skillIdsToRemove } } }, // using $in operator to match any values in the provided array
-        { new: true }
-      ).populate('skills');
-
-      return updatedUser;
-    },
+      const skillToRemove = await Skills.findOne({ name: oldSkill });
+    
+      if (skillToRemove) {
+        
+        const updatedUser = await User.findOneAndUpdate(
+          { email },
+          { $pull: { skills: skillToRemove._id } },
+          { new: true }
+        ).populate('skills');
+    
+        return updatedUser;
+      } else {
+        // Skill not found, return the user without any changes.
+        const user = await User.findOne({ email }).populate('skills');
+        return user;
+      }
+    }
 
   },
 };
