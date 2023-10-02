@@ -1,50 +1,48 @@
 import { UserContext } from "../pages/Profile";
 import React, { useContext, useState } from "react";
 
-export default function EditCandidate() {
+export default function EditCandidate({editDisplay, setEditDisplay}) {
+    console.log(editDisplay)
     const user = useContext(UserContext)
-    console.log(user.firstName)
+    console.log(user)
+
+    const [formState, setFormState] = useState({
+        firstName: user.firstName,
+        lastName: user.lastName ,
+        email: user.email,
+        userCity: user.userCity,
+        userState: user.userState,
+        education: user.education,
+      });
 
     
-    const [firstNameForm, setFirstNameForm] = useState(user.firstName || '')
-    const [lastNameForm, setLastNameForm] = useState(user.lastName || '')
-    const [emailForm, setEmailForm] = useState(user.email || '' )
-    const [cityForm, setCityForm] = useState(user.userCity || '')
-    const [stateForm, setStateForm] = useState(user.userState || '')
-    const [educationForm, setEducationForm] = useState(user.education || '')
+      const handleChange = (event) => {
+        const { name, value } = event.target;
+    
+        setFormState({
+          ...formState,
+          [name]: value,
+        });
+      };
 
+      function handleEditSubmit(event){
+        event.preventDefault();
+        console.log(editDisplay)
+        setEditDisplay('hidden')
+      }
 
-    const handleInputChange = (event) => {
-        const inputName = event.target.name;
-        const inputValue = event.target.value
-
-
-        if (inputName === 'firstName') {
-            setFirstNameForm(inputValue)
-        } else if (inputName === 'lastName') {
-            setLastNameForm(inputValue)
-        } else if
-            (inputName === 'email') {
-            setEmailForm(inputValue)
-        } else if (inputName === 'city') {
-            setCityForm(inputValue)
-        } else if (inputName === 'state') {
-            setStateForm(inputValue)
-        } else if (inputName === 'education') {
-            setEducationForm(inputValue)
-        }
-    }
     return (
         // must add  onSubmit handler
         <div>
-            <form className='edit-candidate' >
+            <form className={editDisplay} >
                 <label className='form-label' htmlFor='firstName'> First Name:
                     <textarea
                         className='canidate-form-box'
                         type='text'
                         name='firstName'
-                        value={firstNameForm}
-                        onChange={handleInputChange}>
+                        value={formState.firstName}
+                        defaultValue={formState.firstName || user.firstName}
+                        onChange={handleChange}>
                     </textarea>
                 </label>
                 <label className='form-label' htmlFor='lastName'> Last Name:
@@ -52,8 +50,8 @@ export default function EditCandidate() {
                         className='canidate-form-box'
                         type='text'
                         name='lastName'
-                        value={lastNameForm}
-                        onChange={handleInputChange}>
+                        value={formState.lastName || user.lastName}
+                        onChange={handleChange}>
                     </textarea>
                 </label>
                 <label className='form-label' htmlFor='email'> Email:
@@ -61,26 +59,26 @@ export default function EditCandidate() {
                         className='canidate-form-box'
                         type='text'
                         name='email'
-                        value={emailForm}
-                        onChange={handleInputChange}>
+                        value={formState.email || user.email}
+                        onChange={handleChange}>
                     </textarea>
                 </label>
                 <label className='form-label' htmlFor='city'> City:
                     <textarea
                         className='canidate-form-box'
                         type='text'
-                        name='city'
-                        value={cityForm}
-                        onChange={handleInputChange}>
+                        name='userCity'
+                        value={formState.userCity || user.userCity}
+                        onChange={handleChange}>
                     </textarea>
                 </label>
                 <label className='form-label' htmlFor='state'> State:
                     <textarea
                         className='canidate-form-box'
                         type='text'
-                        name='state'
-                        value={stateForm}
-                        onChange={handleInputChange}>
+                        name='userState'
+                        value={formState.userState || user.userState}
+                        onChange={handleChange}>
                     </textarea>
                 </label>
                 <label className='form-label' htmlFor='education'> Education:
@@ -88,13 +86,13 @@ export default function EditCandidate() {
                         className='canidate-form-box'
                         type='text'
                         name='education'
-                        value={educationForm}
-                        onChange={handleInputChange}>
+                        value={formState.education || user.education}
+                        onChange={handleChange}>
                     </textarea>
                 </label>
 
 
-                <input className='btn' type='submit' value='Submit' />
+                <input className='custom-btn' type='submit' value='Submit' onClick={handleEditSubmit} />
             </form>
         </div>
 

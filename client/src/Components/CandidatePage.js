@@ -15,6 +15,7 @@ export default function CandidatePage() {
   const user = useContext(UserContext)
   const [skillForm, setSkillForm] = useState('');
   const [skills, setSkills] = useState([]);
+  const [editDisplay, setEditDisplay] = useState('hidden')
   const [showResumePopup, setShowResumePopup] = useState(false); // To control resume popup visibility
 
   const handleInputChange = (event) => {
@@ -102,11 +103,16 @@ export default function CandidatePage() {
     // You can add your logic for handling the uploaded file, e.g., send it to a server or display it.
   };
 
+  function openEditor() {
+    setEditDisplay('edit-candidate')
+    console.log(editDisplay)
+  }
+
   return (
     <div className="candidate-profile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '275px' }}>
       <div style={{ marginLeft: '80px' }}>
         <h1> Hello, {user.firstName}!</h1>
-        <button className="btn">Edit Profile</button>
+        <button className="btn" onClick={() => openEditor()}>Edit Profile</button>
         <h3> Location: {user.userCity}, {user.userState}</h3>
         <h3>Education: {user.education}</h3>
         <h3>Skills:</h3>
@@ -156,7 +162,7 @@ export default function CandidatePage() {
           marginTop: '-230px', // this moves the image up (or down)
         }}
       />
-       <EditCandidate user={user} style={{display: 'none'}}></EditCandidate>
+       <EditCandidate editDisplay = {editDisplay} setEditDisplay = {setEditDisplay}></EditCandidate>
 
       {/* Resume Popup */}
       {showResumePopup && (

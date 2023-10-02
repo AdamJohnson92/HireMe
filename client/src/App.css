@@ -144,15 +144,18 @@
   height:100%
 }
 
+
+.hidden{
+  display: none;
+}
 .edit-candidate{
   margin:10px;
-  border:5px solid #5271FF;
-  border-radius: 10px;
+  padding:10px;
   display: flex;
   flex-direction: column;
   width: 600px;
   height:400px;
-  gap: 10px;
+  gap: 20px;
   align-items: right;
 }
 
