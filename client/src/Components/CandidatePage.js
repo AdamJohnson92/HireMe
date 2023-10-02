@@ -4,6 +4,8 @@ import { useMutation} from "@apollo/client";
 import React, { useContext, useState, useEffect, createContext } from "react";
 import { QUERY_ME } from "../utils/queries";
 import JohnWick from "../assets/JohnWick.jpg";
+import JohnWicksResume from "../assets/JohnWickResume.pdf"; // Import John Wick's resume PDF
+
 import { ADD_SKILL } from "../utils/mutations";
 
 
@@ -12,6 +14,7 @@ export default function CandidatePage() {
   const user = useContext(UserContext)
   const [skillForm, setSkillForm] = useState('');
   const [skills, setSkills] = useState([]);
+  const [showResumePopup, setShowResumePopup] = useState(false); // To control resume popup visibility
 
   const handleInputChange = (event) => {
     const inputName = event.target.name;
@@ -23,7 +26,8 @@ export default function CandidatePage() {
   }
   const [addSkillMutation] = useMutation(ADD_SKILL);
 
-  const handleSkillSubmit = (event) => {
+  // Make the handleSkillSubmit function async
+  const handleSkillSubmit = async (event) => {
     event.preventDefault();
 
     try {
@@ -51,7 +55,7 @@ export default function CandidatePage() {
   };
 
   useEffect(() => {
-    if (user.skills && Array.isArray(user.skills)) {
+    if (user.skills && Array.isArray(user.skills)) { // Access skills directly from the user object
       const skillNames = user.skills.map((skill) => skill.name);
       setSkills(skillNames);
     } else {
@@ -59,9 +63,25 @@ export default function CandidatePage() {
     }
   }, [user.skills]);
 
+  const handleViewResumeClick = () => {
+    // When the "View Resume 📄" button is clicked, open the popup
+    setShowResumePopup(true);
+  };
+
+  const handleClosePopup = () => {
+    // Close the resume popup when the user clicks close or outside the popup
+    setShowResumePopup(false);
+  };
+
+  const handleResumeUpload = (event) => {
+    // Handle the file upload here
+    const file = event.target.files[0];
+    // You can add your logic for handling the uploaded file, e.g., send it to a server or display it.
+  };
+
   return (
     <div className="candidate-profile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '275px' }}>
-      <div style={{ marginLeft: '30px' }}>
+      <div style={{ marginLeft: '80px' }}>
         <h1> Hello, {user.firstName}!</h1>
         <button className="btn">Edit Profile</button>
         <h3> Location: {user.userCity}, {user.userState}</h3>
@@ -76,7 +96,7 @@ export default function CandidatePage() {
           ))}
         </ul>
 
-        <form className="skill-form" onSubmit={handleSkillSubmit}>
+        <form className='skill-form' onSubmit={handleSkillSubmit}>
           <label className='form-label' htmlFor='addSkill'>
             <textarea
               className='candidate-form-box'
@@ -86,12 +106,19 @@ export default function CandidatePage() {
               placeholder="Add a Skill"
               value={skillForm || ''}
               onChange={handleInputChange}
-            >
-            </textarea>
+            ></textarea>
           </label>
           <br />
           <input className='btn' type='submit' value='Submit' />
         </form>
+
+        {/* View Resume and Upload Resume Buttons */}
+        <button className='btn' onClick={handleViewResumeClick}>
+          View Resume 📄
+        </button>
+        <br />
+        <br />
+        <input type="file" accept=".pdf" onChange={handleResumeUpload} />
       </div>
 
       {/* Profile Image with marginTop */}
@@ -99,13 +126,24 @@ export default function CandidatePage() {
         src={JohnWick}
         alt="ProfileImage"
         style={{
-          width: '200px',
-          height: '210px',
+          width: '250px',
+          height: '250px',
           borderRadius: '50%',
-          marginRight: '70px',
-          marginTop: '-200px', // this moves the image up (or down)
+          marginRight: '100px',
+          marginTop: '-230px', // this moves the image up (or down)
         }}
       />
+
+      {/* Resume Popup */}
+      {showResumePopup && (
+        <div className='resume-popup'>
+          <button onClick={handleClosePopup} className='close-popup'>
+            Close
+          </button>
+          {/* Display John Wick's Resume PDF */}
+          <embed src={JohnWicksResume} type='application/pdf' width='100%' height='500px' />
+        </div>
+      )}
     </div>
   );
 }
