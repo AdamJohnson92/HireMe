@@ -6,7 +6,7 @@ import { QUERY_ME } from "../utils/queries";
 import JohnWick from "../assets/JohnWick.jpg";
 import JohnWicksResume from "../assets/JohnWickResume.pdf"; // Import John Wick's resume PDF
 
-import { ADD_SKILL } from "../utils/mutations";
+import { ADD_SKILL, REMOVE_SKILL } from "../utils/mutations";
 
 
 export default function CandidatePage() {
@@ -31,7 +31,7 @@ export default function CandidatePage() {
     event.preventDefault();
 
     try {
-      addSkillMutation({
+      const { data } = await addSkillMutation({
         variables: {
           email: user.email,
           newSkill: skillForm,
@@ -47,8 +47,30 @@ export default function CandidatePage() {
           });
         },
       });
-
+      console.log(data.addSkill)
       setSkillForm("");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
+  const [removeSkill] = useMutation(REMOVE_SKILL);
+
+  const handleRemoveSkill = async (skill) => {
+    try {
+      const { data } = await removeSkill({
+        variables: { email: user.email, oldSkill: skill },
+        update: (cache, { data }) => {
+          const updatedUser = data.removeSkill;
+          cache.writeQuery({
+            query: QUERY_ME,
+            data: {
+              me: updatedUser,
+            },
+          });
+        },
+      });
     } catch (err) {
       console.error(err);
     }
@@ -91,7 +113,7 @@ export default function CandidatePage() {
           {skills.map((skill, index) => (
             <li key={index}>
               {skill}
-              {!user.isEmployer ? <button className="btn" style={{ width: '10px', height: '15px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginLeft: "5px" }}>X</button> : <></>}
+              {!user.isEmployer ? <button className="btn" style={{ width: '10px', height: '15px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginLeft: "5px" }} onClick={() => handleRemoveSkill(skill)}>X</button> : <></>}
             </li>
           ))}
         </ul>
