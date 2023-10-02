@@ -1,8 +1,10 @@
 import { UserContext } from "../pages/Home";
-import Skill from './Skill';
+import Skill from './Skill'
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useContext, useState, useEffect } from "react";
 import { QUERY_ME } from "../utils/queries";
 import JohnWick from "../assets/JohnWick.jpg";
+import { ADD_SKILL } from "../utils/mutations";
 
 export default function CandidatePage(user) {
   const [skillForm, setSkillForm] = useState('');
@@ -16,13 +18,32 @@ export default function CandidatePage(user) {
       setSkillForm(inputValue);
     }
   }
+  const [addSkillMutation] = useMutation(ADD_SKILL);
 
   const handleSkillSubmit = (event) => {
     event.preventDefault();
 
-    if (skillForm.trim() !== '') {
-      setSkills([...skills, skillForm]);
-      setSkillForm('');
+    try {
+      await addSkillMutation({
+        variables: {
+          email: user.user.email,
+          newSkill: skillForm,
+        },
+        // Update the cache to include the newly added skill
+        update: (cache, { data }) => {
+          const updatedUser = data.addSkill;
+          cache.writeQuery({
+            query: QUERY_ME,
+            data: {
+              me: updatedUser,
+            },
+          });
+        },
+      });
+
+      setSkillForm("");
+    } catch (err) {
+      console.error(err);
     }
   };
 
