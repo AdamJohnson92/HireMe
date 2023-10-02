@@ -1,8 +1,9 @@
 import { UserContext } from "../pages/Home";
 import Skill from './Skill'
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useContext, useState } from "react";
 import { QUERY_ME } from "../utils/queries";
+import { ADD_SKILL } from "../utils/mutations";
 
 export default function CandidatePage(user) {
   console.log(user.user)
@@ -21,17 +22,30 @@ export default function CandidatePage(user) {
       console.log(inputValue)
     }
   }
+  const [addSkillMutation] = useMutation(ADD_SKILL);
 
   const handleSkillSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      // Must add mutations!!
-      //   const { data } = await addThought({
-      //     variables: { ...formState },
-      //   });
+      await addSkillMutation({
+        variables: {
+          email: user.user.email,
+          newSkill: skillForm,
+        },
+        // Update the cache to include the newly added skill
+        update: (cache, { data }) => {
+          const updatedUser = data.addSkill;
+          cache.writeQuery({
+            query: QUERY_ME,
+            data: {
+              me: updatedUser,
+            },
+          });
+        },
+      });
 
-      setSkillForm('');
+      setSkillForm("");
     } catch (err) {
       console.error(err);
     }
@@ -64,7 +78,7 @@ export default function CandidatePage(user) {
       <h3>Skills:</h3>
       <ul>
         {skillArray.map((skill) => (
-          <li>
+          <li key = {skill}>
             {skill}
             {!user.isEmployer ? <button className="btn" style={{ width: '10px', height: '15px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginLeft: "5px" }}>X</button> : <></>}
                       </li>
