@@ -1,12 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { createContext } from "react";
 import CandidatePage from "../Components/CandidatePage";
 import EmployerPage from "../Components/EmployerPage";
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
 import Auth from '../utils/auth';
+
+export const UserContext = createContext();
 
 export default function Profile() {
 
@@ -16,7 +18,13 @@ export default function Profile() {
       return <EmployerPage></EmployerPage>
     } else {
       console.log(user)
-      return <CandidatePage user={user}></CandidatePage>
+      return (
+        <>
+          <UserContext.Provider value={user}>
+            <CandidatePage></CandidatePage>
+          </UserContext.Provider>
+        </>
+      )
     }
   }
   const { firstName: userParam } = useParams();
@@ -30,7 +38,7 @@ export default function Profile() {
   if (Auth.loggedIn() && Auth.getProfile().data.firstName === userParam) {
     // setMe(user)
     return <div className="profile">
-      
+
       {renderPage()}
     </div>;
   }
@@ -49,6 +57,6 @@ export default function Profile() {
   }
 
   // return (
-        
+
   //   )
 }

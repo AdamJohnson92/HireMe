@@ -1,14 +1,17 @@
-import { UserContext } from "../pages/Home";
 import Skill from './Skill'
-import { useMutation, useQuery } from "@apollo/client";
-import React, { useContext, useState, useEffect } from "react";
+import { UserContext } from '../pages/Profile';
+import { useMutation} from "@apollo/client";
+import React, { useContext, useState, useEffect, createContext } from "react";
 import { QUERY_ME } from "../utils/queries";
 import JohnWick from "../assets/JohnWick.jpg";
 import JohnWicksResume from "../assets/JohnWickResume.pdf"; // Import John Wick's resume PDF
 
 import { ADD_SKILL } from "../utils/mutations";
 
-export default function CandidatePage({ user }) { // Destructure the user object
+
+export default function CandidatePage() {
+
+  const user = useContext(UserContext)
   const [skillForm, setSkillForm] = useState('');
   const [skills, setSkills] = useState([]);
   const [showResumePopup, setShowResumePopup] = useState(false); // To control resume popup visibility
@@ -28,9 +31,9 @@ export default function CandidatePage({ user }) { // Destructure the user object
     event.preventDefault();
 
     try {
-      await addSkillMutation({
+      addSkillMutation({
         variables: {
-          email: user.email, // Access email directly from the user object
+          email: user.email,
           newSkill: skillForm,
         },
         // Update the cache to include the newly added skill
@@ -77,7 +80,7 @@ export default function CandidatePage({ user }) { // Destructure the user object
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '275px' }}>
+    <div className="candidate-profile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '275px' }}>
       <div style={{ marginLeft: '80px' }}>
         <h1> Hello, {user.firstName}!</h1>
         <button className="btn">Edit Profile</button>
