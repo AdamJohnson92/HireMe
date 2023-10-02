@@ -18,6 +18,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import EmployerPage from './Components/EmployerPage';
+import CandidatePage from './Components/CandidatePage';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -55,6 +56,7 @@ function App() {
               <Route path="/signup" element={<Signup />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/employer" element={<EmployerPage />} /> 
+              <Route path="/candidate" element={<CandidatePage />} /> 
             </Routes>              
             </div>
           <Footer />
