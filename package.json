@@ -9,7 +9,6 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build"
-
   },
   "keywords": [],
   "author": "",
@@ -20,6 +19,7 @@
   "dependencies": {
     "apollo-server-express": "^2.15.0",
     "graphql": "^15.8.0",
-    "mongodb": "^6.1.0"
+    "mongodb": "^6.1.0",
+    "react-pdf": "^7.4.0"
   }
 }
