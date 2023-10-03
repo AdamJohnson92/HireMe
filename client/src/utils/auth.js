@@ -38,7 +38,7 @@ class AuthService {
       window.location.href = '/employer';
     } else {
       // Handle any other roles or cases here
-      window.location.href = '/default-redirect'; 
+      window.location.href = '/'; 
     }
   }
 
