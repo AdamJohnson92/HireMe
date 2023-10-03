@@ -1,10 +1,11 @@
 import Skill from './Skill'
 import { UserContext } from '../pages/Profile';
-import { useMutation} from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import React, { useContext, useState, useEffect, createContext } from "react";
 import { QUERY_ME } from "../utils/queries";
 import JohnWick from "../assets/JohnWick.jpg";
 import JohnWicksResume from "../assets/JohnWickResume.pdf"; // Import John Wick's resume PDF
+import EditCandidate from './EditProfile';
 
 import { ADD_SKILL, REMOVE_SKILL } from "../utils/mutations";
 
@@ -14,6 +15,7 @@ export default function CandidatePage() {
   const user = useContext(UserContext)
   const [skillForm, setSkillForm] = useState('');
   const [skills, setSkills] = useState([]);
+  const [editDisplay, setEditDisplay] = useState('hidden')
   const [showResumePopup, setShowResumePopup] = useState(false); // To control resume popup visibility
 
   const handleInputChange = (event) => {
@@ -101,15 +103,20 @@ export default function CandidatePage() {
     // You can add your logic for handling the uploaded file, e.g., send it to a server or display it.
   };
 
+  function openEditor() {
+    setEditDisplay('edit-candidate')
+    console.log(editDisplay)
+  }
+
   return (
-    <div className="candidate-profile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '275px' }}>
+    <div className="candidate-profile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '100px' }}>
       <div style={{ marginLeft: '80px' }}>
         <h1> Hello, {user.firstName}!</h1>
-        <button className="btn">Edit Profile</button>
-        <h3> Location: {user.userCity}, {user.userState}</h3>
-        <h3>Education: {user.education}</h3>
-        <h3>Skills:</h3>
-        <ul>
+        <button className="btn" onClick={() => openEditor()}>Edit Profile</button>
+        <h3 style={{ marginLeft: '120px' }}> Location: {user.userCity}, {user.userState}</h3>
+        <h3 style={{ marginLeft: '120px' }}>Education: {user.education}</h3>
+        <h3 style={{ marginLeft: '120px' }}>Skills:</h3>
+        <ul style={{ marginLeft: '120px' }}>
           {skills.map((skill, index) => (
             <li key={index}>
               {skill}
@@ -118,7 +125,7 @@ export default function CandidatePage() {
           ))}
         </ul>
 
-        <form className='skill-form' onSubmit={handleSkillSubmit}>
+        <form className='skill-form' onSubmit={handleSkillSubmit} style={{ marginLeft: '120px' }}>
           <label className='form-label' htmlFor='addSkill'>
             <textarea
               className='candidate-form-box'
@@ -135,15 +142,15 @@ export default function CandidatePage() {
         </form>
 
         {/* View Resume and Upload Resume Buttons */}
-        <button className='btn' onClick={handleViewResumeClick}>
+        <button className='btn' onClick={handleViewResumeClick} style={{ marginLeft: '120px' }}>
           View Resume 📄
         </button>
         <br />
         <br />
-        <input type="file" accept=".pdf" onChange={handleResumeUpload} />
+        <input type="file" accept=".pdf" onChange={handleResumeUpload} style={{ marginLeft: '120px' }} />
       </div>
 
-      {/* Profile Image with marginTop */}
+      {/* Profile Image */}
       <img
         src={JohnWick}
         alt="ProfileImage"
@@ -151,10 +158,11 @@ export default function CandidatePage() {
           width: '250px',
           height: '250px',
           borderRadius: '50%',
-          marginRight: '100px',
-          marginTop: '-230px', // this moves the image up (or down)
+          marginRight: '-375px',
+          marginTop: '-275px', // this moves the image up (or down)
         }}
       />
+      <EditCandidate editDisplay={editDisplay} setEditDisplay={setEditDisplay}></EditCandidate>
 
       {/* Resume Popup */}
       {showResumePopup && (
@@ -166,6 +174,7 @@ export default function CandidatePage() {
           <embed src={JohnWicksResume} type='application/pdf' width='100%' height='500px' />
         </div>
       )}
+
     </div>
   );
 }

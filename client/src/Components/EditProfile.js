@@ -1,68 +1,102 @@
-import { UserContext } from "../pages/Home";
+import { UserContext } from "../pages/Profile";
 import React, { useContext, useState } from "react";
 
-export default function CandidatePage() {
-    const user = useContext(UserContext)
+export default function EditCandidate({ editDisplay, setEditDisplay }) {
+    console.log(editDisplay);
+    const user = useContext(UserContext);
+    console.log(user);
+
+    const [formState, setFormState] = useState({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        userCity: user.userCity,
+        userState: user.userState,
+        education: user.education,
+    });
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+    };
+
+    function handleEditSubmit(event) {
+        event.preventDefault();
+        console.log(editDisplay);
+        setEditDisplay('hidden');
+    }
+
     return (
-        // must add onSubmit handler
-        <form className="edit-candidate-form" >
-            <label className='form-label' htmlFor='firstName'> First Name:
-                <textarea
+        <div>
+            <form className={editDisplay}>
+                <label className='form-label' htmlFor='firstName'> First Name:</label>
+                <input
                     className='canidate-form-box'
                     type='text'
                     name='firstName'
-                    defaultValue={user.firstName}
-                    value={firstNameForm || ''}>
-                </textarea>
-            </label>
-            <label className='form-label' htmlFor='lastName'> Last Name: 
-                <textarea
+                    value={formState.firstName}
+                    defaultValue={formState.firstName || user.firstName}
+                    onChange={handleChange}
+                    placeholder="firstName"
+                    style={{ width: '200px' }} 
+                />
+                <label className='form-label' htmlFor='lastName'> Last Name:</label>
+                <input
                     className='canidate-form-box'
                     type='text'
                     name='lastName'
-                    defaultValue={user.lastName}
-                    value={lastNameForm || ''}>
-                </textarea>
-            </label>
-            <label className='form-label' htmlFor='email'> Email:
-                <textarea
+                    value={formState.lastName || user.lastName}
+                    onChange={handleChange}
+                    placeholder="last name"
+                    style={{ width: '200px' }} 
+                />
+                <label className='form-label' htmlFor='email'> Email:</label>
+                <input
                     className='canidate-form-box'
                     type='text'
                     name='email'
-                    defaultValue={user.email}
-                    value={emailForm || ''}>
-                </textarea>
-            </label>
-            <label className='form-label' htmlFor='city'> City:
-                <textarea
+                    value={formState.email || user.email}
+                    onChange={handleChange}
+                    placeholder="email"
+                    style={{ width: '200px' }} 
+                />
+                <label className='form-label' htmlFor='city'> City:</label>
+                <input
                     className='canidate-form-box'
                     type='text'
-                    name='city'
-                    defaultValue={user.city}
-                    value={cityForm || ''}>
-                </textarea>
-            </label>
-            <label className='form-label' htmlFor='state'> State:
-                <textarea
+                    name='userCity'
+                    value={formState.userCity || user.userCity}
+                    onChange={handleChange}
+                    placeholder="city"
+                    style={{ width: '200px' }} 
+                />
+                <label className='form-label' htmlFor='state'> State:</label>
+                <input
                     className='canidate-form-box'
                     type='text'
-                    name='state'
-                    defaultValue={user.state}
-                    value={stateForm || ''}>
-                </textarea>
-            </label>
-            <label className='form-label' htmlFor='education'> Education:
-                <textarea
+                    name='userState'
+                    value={formState.userState || user.userState}
+                    onChange={handleChange}
+                    placeholder="state"
+                    style={{ width: '200px' }} 
+                />
+                <label className='form-label' htmlFor='education'> Education:</label>
+                <input
                     className='canidate-form-box'
                     type='text'
                     name='education'
-                    defaultValue={user.education}
-                    value={educationForm || ''}>
-                </textarea>
-            </label>
+                    value={formState.education || user.education}
+                    onChange={handleChange}
+                    placeholder="education"
+                    style={{ width: '200px' }} 
+                />
 
-
-            <input className='btn' type='submit' value='Submit' />
-        </form>
-    )
+                <input className='custom-btn' type='submit' value='Submit' onClick={handleEditSubmit} />
+            </form>
+        </div>
+    );
 }
