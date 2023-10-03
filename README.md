@@ -31,6 +31,11 @@ Hire Me simplifies the hiring process, providing employers with an efficient way
 
 ## Screenshots
 
+VIDEO OF HOMEPAGE INTRODUCTION:
+<br>
+https://drive.google.com/file/d/1iWcdSYOkEU8zRedzBtRPSQixdidHwqvt/view
+client/src/assets/HireMeVideo.webm
+
 HOME PAGE:
 ![Home Page](client/src/assets/HomePage.png)
 <br>
