@@ -29,7 +29,7 @@ export default function Header() {
         fontStyle: 'italic',
         width: '100%',
         textAlign: 'center',
-        margin: '0 auto',
+        margin: '0px 200px 0px 0px',
     };
 
     const mobileSloganStyle = {

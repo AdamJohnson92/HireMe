@@ -27,9 +27,19 @@ class AuthService {
     return localStorage.getItem('id_token');
   }
 
-  login(idToken) {
+
+  login(idToken, role) {
     localStorage.setItem('id_token', idToken);
-    window.location.href = '/employer'; // Redirect to the Employer page
+
+    // Redirect based on the user's role
+    if (role === 'candidate') {
+      window.location.href = '/candidate';
+    } else if (role === 'employer') {
+      window.location.href = '/employer';
+    } else {
+      // Handle any other roles or cases here
+      window.location.href = '/default-redirect'; 
+    }
   }
 
   logout() {
