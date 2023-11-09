@@ -31,6 +31,7 @@ export default function EditCandidate({ editDisplay, setEditDisplay }) {
     }
 
     return (
+        // must add  onSubmit handler
         <div>
             <form className={editDisplay}>
                 <label className='form-label' htmlFor='firstName'> First Name:</label>

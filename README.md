@@ -31,6 +31,11 @@ Hire Me simplifies the hiring process, providing employers with an efficient way
 
 ## Screenshots
 
+VIDEO OF HOMEPAGE INTRODUCTION:
+<br>
+https://drive.google.com/file/d/1iWcdSYOkEU8zRedzBtRPSQixdidHwqvt/view
+client/src/assets/HireMeVideo.webm
+
 HOME PAGE:
 ![Home Page](client/src/assets/HomePage.png)
 <br>
@@ -70,13 +75,21 @@ CANDIDATE PROFILE:
 
 <br>
 
-  - Backend: <br>
-&nbsp; Robert Hall: https://github.com/Roberthall653 <br>
-&nbsp; Lexin Wiesner: https://github.com/LexinW
+- <u>Backend:</u>
+  - Robert Hall:
+    - Role: &nbsp; Authentication, Queries, Mutations 
+    - https://github.com/Roberthall653 <br>
+  - Lexin Wiesner: 
+    - Role: &nbsp; MongoDB, Mongoose, Apollo server
+    - https://github.com/LexinW
 <br> <br>
-  - Frontend: <br>
-&nbsp; Adam Johnson: https://github.com/AdamJohnson92 <br>
-&nbsp; Lavina Castillo: https://github.com/WHT-RBT 
+- <u>Frontend:</u>
+  - Adam Johnson:
+    - Role: &nbsp; React Component Management 
+    - https://github.com/AdamJohnson92 <br>
+  - Lavina Castillo:<br>
+    - Role: &nbsp; Concept, UX Design, Logo, Styling, React Components <br>
+    - https://github.com/WHT-RBT 
 
 <br>
 

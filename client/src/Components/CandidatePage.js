@@ -162,6 +162,7 @@ export default function CandidatePage() {
           marginTop: '-275px', // this moves the image up (or down)
         }}
       />
+      
       <EditCandidate editDisplay={editDisplay} setEditDisplay={setEditDisplay}></EditCandidate>
 
       {/* Resume Popup */}

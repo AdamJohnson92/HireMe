@@ -1,8 +1,6 @@
 import './App.css';
-import React, {useState} from 'react'
+import React from 'react'
 // import { LoginContext } from './Context/LoginContext'
-import CandidateCard from './Components/CandidateCard';
-import Skill from './Components/Skill';
 import Header from './Components/Header';
 import Footer from './Components/Footer'
 import { setContext } from '@apollo/client/link/context';
@@ -16,7 +14,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Home from './pages/Home';
-import Profile from './pages/Profile';
 import EmployerPage from './Components/EmployerPage';
 import CandidatePage from './Components/CandidatePage';
 
@@ -54,7 +51,6 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/profile" element={<Profile />} />
               <Route path="/employer" element={<EmployerPage />} /> 
               <Route path="/candidate" element={<CandidatePage />} /> 
             </Routes>              

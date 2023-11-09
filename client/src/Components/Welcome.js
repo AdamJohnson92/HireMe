@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useRef } from "react";
 import "../App.css";
 import candidate from "../assets/candidate.png";
 import employer from "../assets/employer.png";
-import welcomeVideo from "../assets/WelcomeHireMe.mp4"; 
+import welcomeVideo from "../assets/WelcomeHireMe.mp4";
+import ClickHereImage from "../assets/ClickHere.png";
 
 export default function Welcome() {
+    const imageStyle = {
+        border: "none",
+        width: "150px",
+        height: "auto",
+        cursor: "pointer", 
+        position: "absolute",
+        bottom: "235px",
+        right: "340px",
+    };
+
+    const videoRef = useRef(null);
+
+    const handleImageClick = () => {
+        // Check if the video is paused, and if so, play it; otherwise, pause it
+        if (videoRef.current.paused) {
+            videoRef.current.play();
+        } else {
+            videoRef.current.pause();
+        }
+    };
+
     return (
         <main className="main">
-            {/* Introduction paragraph */}
             <div className="introduction-container" style={{ marginBottom: "50px" }}>
                 <h2 className="introduction-title" style={{ color: '#5271FF', marginBottom: "0px", fontWeight: "bold", marginLeft: "15px" }}>
                     Welcome to Hire Me!
@@ -29,10 +50,8 @@ export default function Welcome() {
                         Signup Now!
                     </a>
                 </p>
-            </div>
-
-            {/* Images */}
-            <div className="image-container" style={{ marginRight: "300px" }} >
+                </div>
+            <div className="image-container" style={{ marginRight: "300px" }}>
                 <img
                     src={candidate}
                     alt="Candidate"
@@ -48,11 +67,17 @@ export default function Welcome() {
                     width="300"
                     height="300"
                 />
-
-                {/* Video */}
+                <img
+                    src={ClickHereImage}
+                    alt="ClickHereImage"
+                    style={imageStyle}
+                    onClick={handleImageClick} // Handle click event
+                />
                 <video
+                    ref={videoRef}
+                    id="welcomeVideo"
                     src={welcomeVideo}
-                    // autoPlay // Auto play on page load
+                    autoPlay
                     className="welcome-video"
                     width="400"
                     height="450"

@@ -1,5 +1,5 @@
 import '../App.css';
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 // import { LoginContext } from './Context/LoginContext'
 import Profile from './Profile';
 import Footer from '../Components/Footer'
@@ -14,11 +14,9 @@ function Home() {
 
   return (
     <div className="hire-app">
-          {/* Two columns with images for reviews */}
           <Welcome />
           <Profile />
-          {/* <InspectCandidate></InspectCandidate> */}
-      <Footer />
+          <Footer />
 
     </div>
   );

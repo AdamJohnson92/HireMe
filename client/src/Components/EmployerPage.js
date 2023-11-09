@@ -1,9 +1,5 @@
 import "../App.css";
 import Card from "./CandidateCard";
-import React, { useState, useContext } from "react";
-import { Link } from 'react-router-dom';
-import { ArrayContext, UserContext } from "../pages/Home";
-
 
 export default function EmployerPage() {
 
@@ -60,7 +56,5 @@ export default function EmployerPage() {
                 </div>
             </form>
         </>
-
-        )
-    }
-
+    )
+}
