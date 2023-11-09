@@ -2,7 +2,7 @@
   "name": "hire-me-app",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://WHT-RBT.github.io/HireMe",
+  "homepage": "https://github.com/WHT-RBT/HireMe", 
   "description": "",
   "main": "server/server.js",
   "scripts": {
@@ -25,7 +25,7 @@
     "recruitment"
 ]
 ,
-  "author": "Lavina Castillo-UX Design, Logo, Styling",
+  "author": "Lavina Castillo",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
